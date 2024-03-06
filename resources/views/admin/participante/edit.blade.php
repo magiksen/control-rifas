@@ -28,41 +28,42 @@
 
                             <h4 class="card-title">Datos del participante</h4>
                             <p class="card-title-desc">Ingresa los datos del participante</p>
-                            <form method="post" action="{{ route('participantes.store') }}">
+                            <form method="PUT" action="{{ route('participantes.update',$participante->id) }}">
                                 @csrf
                             <div class="row mb-3">
                                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Nombre" id="nombre" name="nombre">
+                                    <input type="hidden" name="id" value="{{ $participante->id }}">
+                                    <input class="form-control" type="text" placeholder="Nombre" id="nombre" name="nombre" value="{{ $participante->nombre }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Apellido" id="apellido" name="apellido">
+                                    <input class="form-control" type="text" placeholder="Apellido" id="apellido" name="apellido" value="{{ $participante->apellido }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="cedula" class="col-sm-2 col-form-label">Cedula</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Cédula" id="cedula" name="cedula">
+                                    <input class="form-control" type="text" placeholder="Cédula" id="cedula" name="cedula" value="{{ $participante->cedula }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="correo" class="col-sm-2 col-form-label">Correo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="email" placeholder="correo@correo.com" id="correo" name="correo">
+                                    <input class="form-control" type="email" placeholder="correo@correo.com" id="correo" name="correo" value="{{ $participante->correo }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="tel" placeholder="04241234567" id="telefono" name="telefono">
+                                    <input class="form-control" type="tel" placeholder="04241234567" id="telefono" name="telefono" value="{{ $participante->telefono }}">
                                 </div>
                             </div>
                             <!-- end row -->
 
-                            <button class="btn btn-primary" type="submit">Crear</button>
+                            <button class="btn btn-primary" type="submit">Actualizar</button>
                             </form>
                         </div>
                     </div>

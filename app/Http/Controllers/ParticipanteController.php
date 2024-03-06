@@ -11,8 +11,10 @@ class ParticipanteController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('welcome');
+    {   
+        $participantes = Participante::all();
+
+        return view('admin.participante.index', compact('participantes'));
     }
 
     /**
@@ -28,7 +30,16 @@ class ParticipanteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $participante = new Participante;
+        $participante->nombre = $request->nombre;
+        $participante->apellido = $request->apellido;
+        $participante->cedula = $request->cedula;
+        $participante->correo = $request->correo;
+        $participante->telefono = $request->telefono;
+
+        $participante->save();
+        
+        return view('admin.participante.show', ['participante' => $participante])->with('success', 'Participante creado correctamente');
     }
 
     /**
@@ -36,7 +47,9 @@ class ParticipanteController extends Controller
      */
     public function show(Participante $participante)
     {
-        //
+        $participante = Participante::where('id', $participante->id)->first();
+
+        return view('admin.participante.show', ['participante' => $participante]);
     }
 
     /**
@@ -44,7 +57,9 @@ class ParticipanteController extends Controller
      */
     public function edit(Participante $participante)
     {
-        //
+        $participante = Participante::where('id', $participante->id)->first();
+
+        return view('admin.participante.edit', ['participante' => $participante]);
     }
 
     /**
@@ -52,7 +67,18 @@ class ParticipanteController extends Controller
      */
     public function update(Request $request, Participante $participante)
     {
-        //
+        $affected = DB::table('participantes')
+              ->where('id', $participante->id)
+              ->update([
+                'nombre' => $request->nombre,
+                'apellido' => $request->apellido,
+                'cedula' => $request->cedula,
+                'correo' => $request->correo,
+                'telefono' => $request->telefono
+            ]);
+        
+            return Redirect()->back()->with('success', 'Participante actualizado correctamente');
+
     }
 
     /**
