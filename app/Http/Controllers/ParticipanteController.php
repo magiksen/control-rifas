@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Participante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ParticipanteController extends Controller
 {
@@ -30,6 +31,14 @@ class ParticipanteController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'cedula' => 'required|unique:participantes|max:255',
+            'correo' => 'required',
+            'telefono' => 'required',
+        ]);
+
         $participante = new Participante;
         $participante->nombre = $request->nombre;
         $participante->apellido = $request->apellido;
@@ -45,9 +54,9 @@ class ParticipanteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Participante $participante)
+    public function show($id)
     {
-        $participante = Participante::where('id', $participante->id)->first();
+        $participante = Participante::where('id', $id)->first();
 
         return view('admin.participante.show', ['participante' => $participante]);
     }
@@ -55,9 +64,9 @@ class ParticipanteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Participante $participante)
+    public function edit($id)
     {
-        $participante = Participante::where('id', $participante->id)->first();
+        $participante = Participante::where('id', $id)->first();
 
         return view('admin.participante.edit', ['participante' => $participante]);
     }
@@ -65,10 +74,10 @@ class ParticipanteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Participante $participante)
+    public function update(Request $request, $id)
     {
         $affected = DB::table('participantes')
-              ->where('id', $participante->id)
+              ->where('id', $id)
               ->update([
                 'nombre' => $request->nombre,
                 'apellido' => $request->apellido,

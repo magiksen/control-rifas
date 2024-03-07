@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vendedor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VendedorController extends Controller
 {
@@ -12,15 +13,18 @@ class VendedorController extends Controller
      */
     public function index()
     {
-        //
+        $vendedores = Vendedor::all();
+
+        return view('admin.vendedor.index', compact('vendedores'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('admin.vendedor.create');
     }
 
     /**
@@ -28,31 +32,52 @@ class VendedorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vendedor = new Vendedor;
+        $vendedor->nombre = $request->nombre;
+        $vendedor->apellido = $request->apellido;
+        $vendedor->cedula = $request->cedula;
+        $vendedor->telefono = $request->telefono;
+
+        $vendedor->save();
+        
+        return view('admin.vendedor.show', ['vendedor' => $vendedor])->with('success', 'vendedor creado correctamente');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Vendedor $vendedor)
+    public function show($id)
     {
-        //
+        $vendedor = Vendedor::where('id', $id)->first();
+
+        return view('admin.vendedor.show', ['vendedor' => $vendedor]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vendedor $vendedor)
+    public function edit($id)
     {
-        //
+        $vendedor = Vendedor::where('id', $id)->first();
+
+        return view('admin.vendedor.edit', ['vendedor' => $vendedor]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Vendedor $vendedor)
+    public function update(Request $request, $id)
     {
-        //
+        $affected = DB::table('vendedors')
+              ->where('id', $id)
+              ->update([
+                'nombre' => $request->nombre,
+                'apellido' => $request->apellido,
+                'cedula' => $request->cedula,
+                'telefono' => $request->telefono
+            ]);
+        
+            return Redirect()->back()->with('success', 'Vendedor actualizado correctamente');
     }
 
     /**

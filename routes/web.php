@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ParticipanteController;
+use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('participantes', ParticipanteController::class)->middleware(['auth']);
+Route::controller(ParticipanteController::class)->group(function () {
+    Route::get('/participantes', 'index')->name('participantes.index');
+    Route::get('/participante/{id}', 'show')->name('participante.show');
+    Route::get('/participante/{id}/edit', 'edit')->name('participante.edit');
+    Route::post('/participante/{id}/edit', 'update')->name('participante.update');
+    Route::get('/participantes/create', 'create')->name('participantes.create');
+    Route::post('/participantes/store', 'store')->name('participantes.store');
+})->middleware(['auth']);
+
+Route::controller(VendedorController::class)->group(function () {
+    Route::get('/vendedores', 'index')->name('vendedores.index');
+    Route::get('/vendedor/{id}', 'show')->name('vendedor.show');
+    Route::get('/vendedor/{id}/edit', 'edit')->name('vendedor.edit');
+    Route::post('/vendedor/{id}/edit', 'update')->name('vendedor.update');
+    Route::get('/vendedores/create', 'create')->name('vendedores.create');
+    Route::post('/vendedores/store', 'store')->name('vendedores.store');
+})->middleware(['auth']);
+
+
 require __DIR__.'/auth.php';

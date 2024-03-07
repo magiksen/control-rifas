@@ -7,12 +7,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Crear Participante</h4>
+                        <h4 class="mb-sm-0">Editar Vendedor</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Participante</a></li>
-                                <li class="breadcrumb-item active">Crear</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Vendedor</a></li>
+                                <li class="breadcrumb-item active">Editar</li>
                             </ol>
                         </div>
 
@@ -26,52 +26,44 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Datos del participante</h4>
-                            <p class="card-title-desc">Ingresa los datos del participante</p>
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            <form method="post" action="{{ route('participantes.store') }}">
+                            <h4 class="card-title">Datos del vendedor</h4>
+                            <p class="card-title-desc">Ingresa los datos del vendedor</p>
+                            <form method="POST" action="{{ route('vendedor.update', $vendedor->id) }}">
                                 @csrf
                             <div class="row mb-3">
                                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Nombre" id="nombre" name="nombre">
+                                    <input type="hidden" name="id" value="{{ $vendedor->id }}">
+                                    <input class="form-control" type="text" placeholder="Nombre" id="nombre" name="nombre" value="{{ $vendedor->nombre }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Apellido" id="apellido" name="apellido">
+                                    <input class="form-control" type="text" placeholder="Apellido" id="apellido" name="apellido" value="{{ $vendedor->apellido }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="cedula" class="col-sm-2 col-form-label">Cedula</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Cédula" id="cedula" name="cedula">
+                                    <input class="form-control" type="text" placeholder="Cédula" id="cedula" name="cedula" value="{{ $vendedor->cedula }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="correo" class="col-sm-2 col-form-label">Correo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="email" placeholder="correo@correo.com" id="correo" name="correo">
+                                    <input class="form-control" type="email" placeholder="correo@correo.com" id="correo" name="correo" value="{{ $vendedor->correo }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="04241234567" id="telefono" name="telefono">
+                                    <input class="form-control" type="tel" placeholder="04241234567" id="telefono" name="telefono" value="{{ $vendedor->telefono }}">
                                 </div>
                             </div>
                             <!-- end row -->
 
-                            <button class="btn btn-primary" type="submit">Crear</button>
+                            <button class="btn btn-primary" type="submit">Actualizar</button>
                             </form>
                         </div>
                     </div>

@@ -7,12 +7,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Crear Participante</h4>
+                        <h4 class="mb-sm-0">Editar Participante</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Participante</a></li>
-                                <li class="breadcrumb-item active">Crear</li>
+                                <li class="breadcrumb-item active">Editar</li>
                             </ol>
                         </div>
 
@@ -28,7 +28,7 @@
 
                             <h4 class="card-title">Datos del participante</h4>
                             <p class="card-title-desc">Ingresa los datos del participante</p>
-                            <form method="PUT" action="{{ route('participantes.update',$participante->id) }}">
+                            <form method="POST" action="{{ route('participante.update', $participante->id) }}">
                                 @csrf
                             <div class="row mb-3">
                                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>

@@ -7,11 +7,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Ver Participantes</h4>
+                        <h4 class="mb-sm-0">Ver Vendedores</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Participantes</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Vendedores</a></li>
                                 <li class="breadcrumb-item active">Lista</li>
                             </ol>
                         </div>
@@ -26,8 +26,8 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Lista de participantes</h4>
-                            <p class="card-title-desc">Visualizar la lista de participantes registrados</p>
+                            <h4 class="card-title">Lista de vendedores</h4>
+                            <p class="card-title-desc">Visualizar la lista de vendedores registrados</p>
 
                             <div class="table-responsive">
                                 <table class="table mb-0">
@@ -38,23 +38,21 @@
                                             <th>Nombre</th>
                                             <th>Apellido</th>
                                             <th>Cédula</th>
-                                            <th>Correo</th>
                                             <th>Teléfono</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($participantes as $participante)
+                                        @foreach($vendedores as $vendedor)
                                         <tr>
-                                            <th scope="row">{{ $participante->id }}</th>
-                                            <td>{{ $participante->nombre }}</td>
-                                            <td>{{ $participante->apellido }}</td>
-                                            <td>{{ $participante->cedula }}</td>
-                                            <td>{{ $participante->correo }}</td>
-                                            <td>{{ $participante->telefono }}</td>
+                                            <th scope="row">{{ $vendedor->id }}</th>
+                                            <td>{{ $vendedor->nombre }}</td>
+                                            <td>{{ $vendedor->apellido }}</td>
+                                            <td>{{ $vendedor->cedula }}</td>
+                                            <td>{{ $vendedor->telefono }}</td>
                                             <td>
-                                                <a href="{{ route('participante.show',$participante->id) }}"><i class="ri-eye-line"></i></a>
-                                                <a href="{{ route('participante.edit',$participante->id) }}"><i class="ri-edit-line"></i></a>
+                                                <a href="{{ route('vendedor.show',$vendedor->id) }}"><i class="ri-eye-line"></i></a>
+                                                <a href="{{ route('vendedor.edit',$vendedor->id) }}"><i class="ri-edit-line"></i></a>
                                                 <a href="#"><i class="ri-delete-bin-line"></i></a>
                                             </td>
                                         </tr>
