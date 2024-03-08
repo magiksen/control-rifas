@@ -19,6 +19,7 @@ class NumeroFactory extends Factory
     {
         return [
             'numero' => $this->faker->unique()->numberBetween($min = 000, $max = 999),
+            'ticket_id' => NULL,
             'participante_id' => NULL,
             'vendedor_id' => NULL,
         ];

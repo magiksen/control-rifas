@@ -24,8 +24,7 @@ class Ticket extends Model
     {
         return $this->belongsTo(Vendedor::class);
     }
-
-    public function Numeros()
+    public function Numero()
     {
         return $this->belongsTo(Numero::class);
     }

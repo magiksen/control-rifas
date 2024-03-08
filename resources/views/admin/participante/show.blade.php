@@ -51,6 +51,28 @@
 
             </div><!-- end row -->
 
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Tickets</h4>
+                            <p class="card-title-desc">Tickets del participante</p>
+                            
+                            <div class="row mb-3">
+                               <p>Numero: 999</p>
+                            </div>
+                            <div class="row mb-3">
+                                <p>Aqui va la imagen del ticket, boton de enviar ticket por ws</p>
+                            </div>
+                            <!-- end row -->
+                            <a href="#" class="btn btn-primary">Registrar Ticket</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end 
+
 
             <!-- end row -->
         </div>

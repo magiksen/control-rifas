@@ -38,6 +38,17 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-ticket-2-line"></i>
+                        <span>Tickets</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('tickets.index') }}">Lista</a></li>
+                        <li><a href="{{ route('tickets.create') }}">Crear</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->

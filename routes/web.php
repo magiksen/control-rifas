@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\VendedorController;
+use App\Http\Controllers\NumeroController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +54,18 @@ Route::controller(VendedorController::class)->group(function () {
     Route::post('/vendedor/{id}/edit', 'update')->name('vendedor.update');
     Route::get('/vendedores/create', 'create')->name('vendedores.create');
     Route::post('/vendedores/store', 'store')->name('vendedores.store');
+})->middleware(['auth']);
+
+Route::controller(NumeroController::class)->group(function () {
+    Route::get('/numeros', 'index')->name('numeros.index');
+    Route::get('/numero/{id}', 'show')->name('numero.show');
+})->middleware(['auth']);
+
+Route::controller(TicketController::class)->group(function () {
+    Route::get('/tickets', 'index')->name('tickets.index');
+    Route::get('/ticket/{id}', 'show')->name('ticket.show');
+    Route::get('/tickets/create', 'create')->name('tickets.create');
+    Route::post('/tickets/store', 'store')->name('tickets.store');
 })->middleware(['auth']);
 
 
