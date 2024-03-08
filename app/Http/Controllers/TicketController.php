@@ -24,12 +24,13 @@ class TicketController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(?string $numero = null)
     {
         $participantes = Participante::all();
         $vendedores = Vendedor::all();
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
-        return view('admin.ticket.create', compact('participantes', 'vendedores', 'numeros'));
+        $numero_solo = Numero::where('numero', $numero)->first();
+        return view('admin.ticket.create', compact('participantes', 'vendedores', 'numeros', 'numero_solo'));
     }
 
     /**

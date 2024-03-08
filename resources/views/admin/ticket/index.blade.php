@@ -33,7 +33,7 @@
                                 @foreach($numeros as $numero)
                                     <div class="col-xl-1 text-center m-2">
                                     @if($numero->ticket_id == 0)
-                                    <a href="{{ route('tickets.create') }}" type="button" class="btn btn-success waves-effect waves-light">{{ $numero->numero }}</a>
+                                    <a href="{{ route('tickets.create',$numero->numero) }}" type="button" class="btn btn-success waves-effect waves-light">{{ $numero->numero }}</a>
                                     @else
                                     <a href="{{ route('ticket.show',$numero->ticket_id) }}" type="button" class="btn btn-danger waves-effect waves-light">{{ $numero->numero }}</a>
                                     @endif

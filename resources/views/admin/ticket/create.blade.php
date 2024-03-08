@@ -35,7 +35,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-select buscable" name="participante" id="participante">
                                         @foreach($participantes as $participante)
-                                        <option value="{{ $participante->id }}">{{ $participante->nombre }}</option>
+                                        <option value="{{ $participante->id }}">{{ $participante->nombre.' '.$participante->apellido }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -45,7 +45,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-select buscable" name="vendedor" id="vendedor">
                                         @foreach($vendedores as $vendedor)
-                                        <option value="{{ $vendedor->id }}">{{ $vendedor->nombre }}</option>
+                                        <option value="{{ $vendedor->id }}">{{ $vendedor->nombre.' '.$vendedor->apellido }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -54,11 +54,15 @@
                                 <label for="numero" class="col-sm-2 col-form-label">Numero</label>
                                 <div class="col-sm-10">
                                     <select class="form-select buscable" name="numero" id="numero">
-                                        @foreach($numeros as $numero)
-                                        @if($numero->participante_id == 0)
-                                        <option value="{{ $numero->id }}">{{ $numero->numero }}</option>
-                                        @endif
-                                        @endforeach
+                                        @if($numero_solo == null)
+                                            @foreach($numeros as $numero)
+                                            @if($numero->participante_id == 0)
+                                            <option value="{{ $numero->id }}">{{ $numero->numero }}</option>
+                                            @endif
+                                            @endforeach
+                                        @else
+                                        <option value="{{ $numero_solo->id }}">{{ $numero_solo->numero }}</option>
+                                        @endif    
                                     </select>
                                 </div>
                             </div>

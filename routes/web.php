@@ -64,7 +64,7 @@ Route::controller(NumeroController::class)->group(function () {
 Route::controller(TicketController::class)->group(function () {
     Route::get('/tickets', 'index')->name('tickets.index');
     Route::get('/ticket/{id}', 'show')->name('ticket.show');
-    Route::get('/tickets/create', 'create')->name('tickets.create');
+    Route::get('/tickets/create/{numero?}', 'create')->name('tickets.create');
     Route::post('/tickets/store', 'store')->name('tickets.store');
 })->middleware(['auth']);
 
