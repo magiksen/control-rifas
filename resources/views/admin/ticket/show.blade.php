@@ -43,6 +43,11 @@
                             <div class="row mb-3">
                                 <p>Telefono: {{ $ticket->participante->telefono }}</p>
                             </div>
+                            <div class="row mb-3">
+                                <div style="width:500px;">
+                                    <img class="img-thumbnail img-fluid" src="{{ asset($ticket->imagen) }}" alt="{{ $ticket->numero->numero }}">
+                                </div>
+                            </div>
                             <!-- end row -->
                             <a href="#" class="btn btn-primary">Enviar ticket</a>
                         </div>

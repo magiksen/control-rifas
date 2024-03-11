@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('participante_id');
             $table->integer('numero_id')->unique();
             $table->string('vendedor_id');
+            $table->string('imagen');
             $table->timestamps();
         });
     }

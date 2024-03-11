@@ -7,6 +7,10 @@ use App\Models\Numero;
 use App\Models\Participante;
 use App\Models\Vendedor;
 use Illuminate\Http\Request;
+use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Typography\FontFactory;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -52,7 +56,63 @@ class TicketController extends Controller
 
         $numero->save();
 
-        return view('admin.ticket.index')->with('info', 'Ticket creado correctamente');
+        $image = Image::read('images/original.jpg');
+
+        $image->text($ticket->numero->numero, 600, 100, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#000000');
+            $font->size(65);
+            $font->align('center');
+            $font->valign('middle');
+        });
+        $image->text($ticket->participante->nombre, 1400, 100, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#000000');
+            $font->size(40);
+            $font->align('center');
+            $font->valign('middle');
+            $font->lineHeight(1.6);
+            $font->wrap(250);
+        });
+        $image->text($ticket->participante->apellido, 1400, 217, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#000000');
+            $font->size(40);
+            $font->align('center');
+            $font->valign('middle');
+            $font->lineHeight(1.6);
+            $font->wrap(250);
+        });
+        $image->text($ticket->participante->telefono, 1400, 327, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#000000');
+            $font->size(40);
+            $font->align('center');
+            $font->valign('middle');
+            $font->lineHeight(1.6);
+            $font->wrap(250);
+        });
+        $image->text($ticket->participante->cedula, 1400, 427, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#000000');
+            $font->size(40);
+            $font->align('center');
+            $font->valign('middle');
+            $font->lineHeight(1.6);
+            $font->wrap(250);
+        });
+
+        $ruta_imagen = 'images/'.$ticket->numero->numero.'-'.$ticket->participante->nombre.'-'.$ticket->participante->apellido.'.jpg';
+
+        $image->save($ruta_imagen);
+
+        $affected = DB::table('tickets')
+              ->where('id', $ticket->id)
+              ->update([
+                'imagen' => $ruta_imagen,
+            ]);
+
+        return redirect()->route('tickets.index')->with('info', 'Ticket creado correctamente');
     }
 
     /**
@@ -88,4 +148,5 @@ class TicketController extends Controller
     {
         //
     }
+
 }

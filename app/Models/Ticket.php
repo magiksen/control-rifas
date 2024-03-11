@@ -14,6 +14,7 @@ class Ticket extends Model
         'participante_id',
         'vendedor_id',
         'numero_id',
+        'imagen',
     ];
 
     public function Participante()
