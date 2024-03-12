@@ -18,7 +18,7 @@ class NumeroFactory extends Factory
     public function definition(): array
     {
         return [
-            'numero' => $this->faker->unique()->numberBetween($min = 000, $max = 999),
+            'numero' => $this->faker->unique()->numerify('###'),
             'ticket_id' => NULL,
             'participante_id' => NULL,
             'vendedor_id' => NULL,

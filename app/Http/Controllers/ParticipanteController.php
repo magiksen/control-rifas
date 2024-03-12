@@ -47,8 +47,13 @@ class ParticipanteController extends Controller
         $participante->telefono = $request->telefono;
 
         $participante->save();
+
+        $notification = array(
+            'message' => 'Participante creado correctamente',
+            'alert-type' => 'success'
+        );
         
-        return view('admin.participante.show', ['participante' => $participante])->with('success', 'Participante creado correctamente');
+        return view('admin.participante.show', ['participante' => $participante])->with($notification);
     }
 
     /**
@@ -85,8 +90,13 @@ class ParticipanteController extends Controller
                 'correo' => $request->correo,
                 'telefono' => $request->telefono
             ]);
+
+            $notification = array(
+                'message' => 'Participante actualizado correctamente',
+                'alert-type' => 'success'
+            );
         
-            return Redirect()->back()->with('success', 'Participante actualizado correctamente');
+            return Redirect()->back()->with($notification);
 
     }
 
