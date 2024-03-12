@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <!-- end row -->
-                            <a href="#" class="btn btn-primary">Enviar ticket</a>
+                            <a href="{{ route('message.send',$ticket->id) }}" class="btn btn-primary">Enviar ticket</a>
                         </div>
                     </div>
                 </div>

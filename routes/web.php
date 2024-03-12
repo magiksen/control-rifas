@@ -5,6 +5,7 @@ use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\NumeroController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\SendMessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,5 +69,8 @@ Route::controller(TicketController::class)->group(function () {
     Route::post('/tickets/store', 'store')->name('tickets.store');
 })->middleware(['auth']);
 
+Route::controller(SendMessageController::class)->group(function () {
+    Route::get('/enviarws/{id}', 'sendmessage')->name('message.send');;
+})->middleware(['auth']);
 
 require __DIR__.'/auth.php';
