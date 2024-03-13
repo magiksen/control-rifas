@@ -46,6 +46,7 @@ class TicketController extends Controller
         $ticket->participante_id = $request->participante;
         $ticket->vendedor_id = $request->vendedor;
         $ticket->numero_id = $request->numero;
+        $ticket->pago = $request->pago;
 
         $ticket->save();
 

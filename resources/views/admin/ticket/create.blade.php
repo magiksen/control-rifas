@@ -68,6 +68,13 @@
                             </div>
                             <!-- end row -->
 
+                            <div class="row m-3 col-4">
+                                <div class="form-check form-switch" dir="ltr">
+                                    <label class="form-check-label" for="pago">Ticket pagado</label>
+                                    <input type="checkbox" class="form-check-input" id="pago" name="pago" value="1">
+                                </div>
+                            </div>
+
                             <button class="btn btn-primary" type="submit">Crear</button>
                             </form>
                         </div>
