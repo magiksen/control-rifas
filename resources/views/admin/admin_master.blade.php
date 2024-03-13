@@ -146,8 +146,6 @@
 
         var _href = $(this).data('href');
 
-        console.log(_href);
-
         const { value: confirmacion } = Swal.fire({
             title: "Estas seguro que quieres eliminar el participante?",
             text: "No podras revertir esto!",

@@ -12,7 +12,8 @@ class Vendedor extends Model
         'nombre',
         'apellido',
         'cedula',
-        'telefono'
+        'telefono',
+        'pais'
     ];
 
     public function Numeros()

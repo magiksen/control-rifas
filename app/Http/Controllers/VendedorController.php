@@ -24,7 +24,9 @@ class VendedorController extends Controller
      */
     public function create()
     {
-        return view('admin.vendedor.create');
+        $paises = DB::table('paises')->get();
+
+        return view('admin.vendedor.create', ['paises' => $paises]);
     }
 
     /**
@@ -37,6 +39,7 @@ class VendedorController extends Controller
         $vendedor->apellido = $request->apellido;
         $vendedor->cedula = $request->cedula;
         $vendedor->telefono = $request->telefono;
+        $vendedor->pais = $request->pais;
 
         $vendedor->save();
 
@@ -65,7 +68,13 @@ class VendedorController extends Controller
     {
         $vendedor = Vendedor::where('id', $id)->first();
 
-        return view('admin.vendedor.edit', ['vendedor' => $vendedor]);
+        $paises = DB::table('paises')->get();
+
+        $pais_selected = DB::table('paises')
+        ->where('pais_numero', '=', $vendedor->pais)
+        ->first();
+
+        return view('admin.vendedor.edit', ['vendedor' => $vendedor, 'paises' => $paises, 'pais_selected' => $pais_selected]);
     }
 
     /**
@@ -79,7 +88,8 @@ class VendedorController extends Controller
                 'nombre' => $request->nombre,
                 'apellido' => $request->apellido,
                 'cedula' => $request->cedula,
-                'telefono' => $request->telefono
+                'telefono' => $request->telefono,
+                'pais' => $request->pais
             ]);
 
             $notification = array(
@@ -93,8 +103,15 @@ class VendedorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vendedor $vendedor)
+    public function destroy($id)
     {
-        //
+        $vendedor = Vendedor::where('id', $id)->delete();
+
+        $notification = array(
+            'message' => 'Vendedor eliminado correctamente',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->back()->with($notification);
     }
 }

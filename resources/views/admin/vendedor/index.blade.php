@@ -53,7 +53,7 @@
                                             <td>
                                                 <a href="{{ route('vendedor.show',$vendedor->id) }}"><i class="ri-eye-line"></i></a>
                                                 <a href="{{ route('vendedor.edit',$vendedor->id) }}"><i class="ri-edit-line"></i></a>
-                                                <a href="#"><i class="ri-delete-bin-line"></i></a>
+                                                <a href="javascript:void(0);" data-href="{{ route('vendedor.destroy',$vendedor->id) }}" class="delete-confirm"><i class="ri-delete-bin-line"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach      

@@ -14,7 +14,8 @@ class Participante extends Model
         'apellido',
         'cedula',
         'correo',
-        'telefono'
+        'telefono',
+        'pais'
     ];
 
     public function Numeros()

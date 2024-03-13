@@ -50,9 +50,14 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="correo" class="col-sm-2 col-form-label">Correo</label>
+                                <label for="pais" class="col-sm-2 col-form-label">Pais</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="email" placeholder="correo@correo.com" id="correo" name="correo" value="{{ $vendedor->correo }}">
+                                    <select class="form-select buscable" name="pais" id="pais">
+                                        <option value="{{ $pais_selected->pais_numero }}">{{ $pais_selected->pais_nombre.' +'.$pais_selected->pais_numero }}</option>
+                                        @foreach($paises as $pais)
+                                        <option value="{{ $pais->pais_numero }}">{{ $pais->pais_nombre.' +'.$pais->pais_numero }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-3">

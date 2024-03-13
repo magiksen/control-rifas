@@ -56,6 +56,7 @@ Route::controller(VendedorController::class)->group(function () {
     Route::post('/vendedor/{id}/edit', 'update')->name('vendedor.update');
     Route::get('/vendedores/create', 'create')->name('vendedores.create');
     Route::post('/vendedores/store', 'store')->name('vendedores.store');
+    Route::get('/vendedor/{id}/delete', 'destroy')->name('vendedor.destroy');
 })->middleware(['auth']);
 
 Route::controller(NumeroController::class)->group(function () {
