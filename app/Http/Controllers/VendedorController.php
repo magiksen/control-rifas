@@ -39,8 +39,13 @@ class VendedorController extends Controller
         $vendedor->telefono = $request->telefono;
 
         $vendedor->save();
+
+        $notification = array(
+            'message' => 'Vendedor creado correctamente',
+            'alert-type' => 'success'
+        );
         
-        return view('admin.vendedor.show', ['vendedor' => $vendedor])->with('success', 'vendedor creado correctamente');
+        return view('admin.vendedor.show', ['vendedor' => $vendedor])->with($notification);
     }
 
     /**
@@ -76,8 +81,13 @@ class VendedorController extends Controller
                 'cedula' => $request->cedula,
                 'telefono' => $request->telefono
             ]);
+
+            $notification = array(
+                'message' => 'Vendedor actualizado correctamente',
+                'alert-type' => 'success'
+            );
         
-            return Redirect()->back()->with('success', 'Vendedor actualizado correctamente');
+            return Redirect()->back()->with($notification);
     }
 
     /**

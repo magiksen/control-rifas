@@ -64,6 +64,17 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label for="pais" class="col-sm-2 col-form-label">Pais</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select buscable" name="pais" id="pais">
+                                        @foreach($paises as $pais)
+                                        <option value="{{ $pais->pais_numero }}">{{ $pais->pais_nombre.' +'.$pais->pais_numero }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row 
+                            <div class="row mb-3">
                                 <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" placeholder="04241234567" id="telefono" name="telefono">

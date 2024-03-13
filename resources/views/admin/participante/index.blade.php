@@ -51,7 +51,7 @@
                                             <td>{{ $participante->apellido }}</td>
                                             <td>{{ $participante->cedula }}</td>
                                             <td>{{ $participante->correo }}</td>
-                                            <td>{{ $participante->telefono }}</td>
+                                            <td>+{{ $participante->pais.$participante->telefono }}</td>
                                             <td>
                                                 <a href="{{ route('participante.show',$participante->id) }}"><i class="ri-eye-line"></i></a>
                                                 <a href="{{ route('participante.edit',$participante->id) }}"><i class="ri-edit-line"></i></a>

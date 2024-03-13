@@ -23,7 +23,9 @@ class ParticipanteController extends Controller
      */
     public function create()
     {
-        return view('admin.participante.create');
+        $paises = DB::table('paises')->get();
+
+        return view('admin.participante.create', ['paises' => $paises]);
     }
 
     /**
@@ -34,8 +36,6 @@ class ParticipanteController extends Controller
         $validated = $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-            'cedula' => 'required|unique:participantes|max:255',
-            'correo' => 'required',
             'telefono' => 'required',
         ]);
 
@@ -45,6 +45,7 @@ class ParticipanteController extends Controller
         $participante->cedula = $request->cedula;
         $participante->correo = $request->correo;
         $participante->telefono = $request->telefono;
+        $participante->pais = $request->pais;
 
         $participante->save();
 
@@ -90,12 +91,12 @@ class ParticipanteController extends Controller
                 'correo' => $request->correo,
                 'telefono' => $request->telefono
             ]);
-
+            
             $notification = array(
                 'message' => 'Participante actualizado correctamente',
                 'alert-type' => 'success'
             );
-        
+
             return Redirect()->back()->with($notification);
 
     }

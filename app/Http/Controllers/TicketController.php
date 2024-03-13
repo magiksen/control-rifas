@@ -57,17 +57,23 @@ class TicketController extends Controller
         $numero->save();
 
         $image = Image::read('images/original.jpg');
+        
+       if($ticket->participante->cedula == NULL) {
+           $cedula = "-";
+       } else {
+           $cedula = $ticket->participante->cedula;
+       }
 
         $image->text($ticket->numero->numero, 600, 100, function (FontFactory $font) {
             $font->filename('fonts/sifonn-basic.otf');
-            $font->color('#000000');
+            $font->color('#FFFFFF');
             $font->size(65);
             $font->align('center');
             $font->valign('middle');
         });
         $image->text($ticket->participante->nombre, 1400, 100, function (FontFactory $font) {
             $font->filename('fonts/sifonn-basic.otf');
-            $font->color('#000000');
+            $font->color('#FFFFFF');
             $font->size(40);
             $font->align('center');
             $font->valign('middle');
@@ -76,7 +82,7 @@ class TicketController extends Controller
         });
         $image->text($ticket->participante->apellido, 1400, 217, function (FontFactory $font) {
             $font->filename('fonts/sifonn-basic.otf');
-            $font->color('#000000');
+            $font->color('#FFFFFF');
             $font->size(40);
             $font->align('center');
             $font->valign('middle');
@@ -85,16 +91,16 @@ class TicketController extends Controller
         });
         $image->text($ticket->participante->telefono, 1400, 327, function (FontFactory $font) {
             $font->filename('fonts/sifonn-basic.otf');
-            $font->color('#000000');
+            $font->color('#FFFFFF');
             $font->size(40);
             $font->align('center');
             $font->valign('middle');
             $font->lineHeight(1.6);
             $font->wrap(250);
         });
-        $image->text($ticket->participante->cedula, 1400, 427, function (FontFactory $font) {
+        $image->text($cedula, 1400, 427, function (FontFactory $font) {
             $font->filename('fonts/sifonn-basic.otf');
-            $font->color('#000000');
+            $font->color('#FFFFFF');
             $font->size(40);
             $font->align('center');
             $font->valign('middle');
@@ -112,7 +118,12 @@ class TicketController extends Controller
                 'imagen' => $ruta_imagen,
             ]);
 
-        return redirect()->route('tickets.index')->with('info', 'Ticket creado correctamente');
+        $notification = array(
+                'message' => 'Ticket creado correctamente',
+                'alert-type' => 'success'
+            );
+        // return redirect()->route('tickets.index')->with('info', 'Ticket creado correctamente');
+        return redirect()->route('ticket.show', ['id' => $ticket->id])->with($notification);
     }
 
     /**
