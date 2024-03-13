@@ -158,10 +158,28 @@ class TicketController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ticket = Ticket::where('id', $id)->first();
+
+        $affected = DB::table('numeros')
+        ->where('id', $ticket->numero_id)
+        ->update([
+          'ticket_id' => '0',
+          'participante_id' => '0',
+          'vendedor_id' => '0',
+        ]);
+
+        $ticket->delete();
+
+        $notification = array(
+            'message' => 'Ticket eliminado correctamente',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->route('tickets.index')->with($notification);
     }
 
-    public function pago($id) {
+    public function pago($id) 
+    {
             $affected = DB::table('tickets')
                 ->where('id', $id)
                 ->update([

@@ -27,7 +27,7 @@
 
                             <h4 class="card-title">Datos del Ticket</h4>
                             <p class="card-title-desc">Visualizar los datos del ticket</p>
-                            
+
                             <div class="row mb-3">
                                <p>Numero: {{ $ticket->numero->numero }}</p>
                             </div>
@@ -59,6 +59,7 @@
                                 El Ticket no ha sido pagado
                              </div>
                             <a href="javascript:void(0);" data-href="{{ route('ticket.pagar', $ticket->id) }}" class="btn btn-success pagar-confirm">Pagar</a>
+                            <a href="javascript:void(0);" data-href="{{ route('ticket.destroy', $ticket->id) }}" class="btn btn-danger delete-confirm">Eliminar ticket</a>
                             @endif
                         </div>
                     </div>

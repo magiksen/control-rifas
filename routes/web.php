@@ -70,6 +70,7 @@ Route::controller(TicketController::class)->group(function () {
     Route::get('/tickets/create/{numero?}', 'create')->name('tickets.create');
     Route::post('/tickets/store', 'store')->name('tickets.store');
     Route::get('/ticket/{id}/pagar', 'pago')->name('ticket.pagar');
+    Route::get('/ticket/{id}/delete', 'destroy')->name('ticket.destroy');
 })->middleware(['auth']);
 
 Route::controller(SendMessageController::class)->group(function () {
