@@ -155,9 +155,24 @@ class TicketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ticket $ticket)
+    public function destroy($id)
     {
         //
+    }
+
+    public function pago($id) {
+            $affected = DB::table('tickets')
+                ->where('id', $id)
+                ->update([
+                    'pago' => 1,
+                ]);
+            
+            $notification = array(
+                'message' => 'El ticket ha sido pagado correctamente',
+                'alert-type' => 'success'
+            );
+
+            return Redirect()->back()->with($notification);
     }
 
 }

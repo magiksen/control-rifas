@@ -49,7 +49,17 @@
                                 </div>
                             </div>
                             <!-- end row -->
+                            @if($ticket->pago == 1)
+                            <div class="alert alert-success col-4" role="alert">
+                                El Ticket esta pago
+                             </div>
                             <a href="{{ route('message.send',$ticket->id) }}" class="btn btn-primary">Enviar ticket</a>
+                            @else
+                            <div class="alert alert-danger col-4" role="alert">
+                                El Ticket no ha sido pagado
+                             </div>
+                            <a href="javascript:void(0);" data-href="{{ route('ticket.pagar', $ticket->id) }}" class="btn btn-success pagar-confirm">Pagar</a>
+                            @endif
                         </div>
                     </div>
                 </div>

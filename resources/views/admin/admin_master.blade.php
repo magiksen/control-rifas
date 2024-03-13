@@ -161,7 +161,28 @@
         });
 
     });
-    </script>
+</script>
+<script>
+    $('.pagar-confirm').click(function(event) {
+
+        var _href = $(this).data('href');
+
+        const { value: confirmacion } = Swal.fire({
+            title: "Estas seguro que quieres colocar el ticket como pagado?",
+            text: "No podras revertir esto!",
+            icon: "warning",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            confirmButtonText: 'Si, Ha sido pagado!',
+            cancelButtonText: "Cancelar",
+        }).then((confirmacion) => {
+            if (confirmacion.isConfirmed) {
+                window.location.href = _href
+            }
+        });
+
+    });
+</script>
 </body>
 
 </html>
