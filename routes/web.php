@@ -46,6 +46,7 @@ Route::controller(ParticipanteController::class)->group(function () {
     Route::post('/participante/{id}/edit', 'update')->name('participante.update');
     Route::get('/participantes/create', 'create')->name('participantes.create');
     Route::post('/participantes/store', 'store')->name('participantes.store');
+    Route::get('/participante/{id}/delete', 'destroy')->name('participante.destroy');
 })->middleware(['auth']);
 
 Route::controller(VendedorController::class)->group(function () {

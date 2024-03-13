@@ -74,7 +74,13 @@ class ParticipanteController extends Controller
     {
         $participante = Participante::where('id', $id)->first();
 
-        return view('admin.participante.edit', ['participante' => $participante]);
+        $paises = DB::table('paises')->get();
+
+        $pais_selected = DB::table('paises')
+        ->where('pais_numero', '=', $participante->pais)
+        ->first();
+
+        return view('admin.participante.edit', ['participante' => $participante, 'paises' => $paises, 'pais_selected' => $pais_selected]);
     }
 
     /**
@@ -89,7 +95,8 @@ class ParticipanteController extends Controller
                 'apellido' => $request->apellido,
                 'cedula' => $request->cedula,
                 'correo' => $request->correo,
-                'telefono' => $request->telefono
+                'telefono' => $request->telefono,
+                'pais' => $request->pais
             ]);
             
             $notification = array(
@@ -104,8 +111,15 @@ class ParticipanteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Participante $participante)
-    {
-        //
+    public function destroy($id)
+    {   
+        $participante = Participante::where('id', $id)->delete();
+
+        $notification = array(
+            'message' => 'Participante eliminado correctamente',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->back()->with($notification);
     }
 }

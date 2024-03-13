@@ -55,7 +55,7 @@
                                             <td>
                                                 <a href="{{ route('participante.show',$participante->id) }}"><i class="ri-eye-line"></i></a>
                                                 <a href="{{ route('participante.edit',$participante->id) }}"><i class="ri-edit-line"></i></a>
-                                                <a href="#"><i class="ri-delete-bin-line"></i></a>
+                                                <a href="javascript:void(0);" data-href="{{ route('participante.destroy',$participante->id) }}" class="delete-confirm"><i class="ri-delete-bin-line"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach      

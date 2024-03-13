@@ -20,6 +20,9 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('backend/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <!-- Sweet Alert-->
+    <link href="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+
     <!-- Bootstrap Css -->
     <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -108,6 +111,9 @@
 <!-- Select2 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+<!-- Sweet Alerts js -->
+<script src="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
 <script>
     @if(Session::has('message'))
     var type = "{{ Session::get('alert-type','info') }}"
@@ -135,6 +141,29 @@
         $('.buscable').select2();
     });
 </script>
+<script>
+    $('.delete-confirm').click(function(event) {
+
+        var _href = $(this).data('href');
+
+        console.log(_href);
+
+        const { value: confirmacion } = Swal.fire({
+            title: "Estas seguro que quieres eliminar el participante?",
+            text: "No podras revertir esto!",
+            icon: "warning",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            confirmButtonText: 'Si, Eliminalo!',
+            cancelButtonText: "Cancelar",
+        }).then((confirmacion) => {
+            if (confirmacion.isConfirmed) {
+                window.location.href = _href
+            }
+        });
+
+    });
+    </script>
 </body>
 
 </html>
