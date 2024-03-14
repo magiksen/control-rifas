@@ -59,7 +59,9 @@
                                 <label for="pais" class="col-sm-2 col-form-label">Pais</label>
                                 <div class="col-sm-10">
                                     <select class="form-select buscable" name="pais" id="pais">
+                                        @if($pais_selected != NULL)
                                         <option value="{{ $pais_selected->pais_numero }}">{{ $pais_selected->pais_nombre.' +'.$pais_selected->pais_numero }}</option>
+                                        @endif
                                         @foreach($paises as $pais)
                                         <option value="{{ $pais->pais_numero }}">{{ $pais->pais_nombre.' +'.$pais->pais_numero }}</option>
                                         @endforeach

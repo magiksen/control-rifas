@@ -194,4 +194,103 @@ class TicketController extends Controller
             return Redirect()->back()->with($notification);
     }
 
+    public function multiplecreate(?string $numero = null)
+    {
+        $participantes = Participante::all();
+        $vendedores = Vendedor::all();
+        $numeros = Numero::query()->orderBy('numero', 'asc')->get();
+
+        return view('admin.ticket.multiple', compact('participantes', 'vendedores', 'numeros'));
+    }
+
+    public function multiplestore(Request $request)
+    {
+        //dd($request->numeros);
+        foreach ($request->numeros as $numero) {
+            $ticket = new Ticket;
+            $ticket->participante_id = $request->participante;
+            $ticket->vendedor_id = $request->vendedor;
+            $ticket->numero_id = $numero;
+            $ticket->pago = $request->pago;
+    
+            $ticket->save();
+
+            $numerito = Numero::find($numero);
+            $numerito->ticket_id = $ticket->id;
+            $numerito->participante_id = $request->participante;
+            $numerito->vendedor_id = $request->vendedor;
+
+            $numerito->save();
+
+            $image = Image::read('images/original.jpg');
+        
+       if($ticket->participante->cedula == NULL) {
+           $cedula = "-";
+       } else {
+           $cedula = $ticket->participante->cedula;
+       }
+
+        $image->text($ticket->numero->numero, 600, 100, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#FFFFFF');
+            $font->size(65);
+            $font->align('center');
+            $font->valign('middle');
+        });
+        $image->text($ticket->participante->nombre, 1400, 100, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#FFFFFF');
+            $font->size(40);
+            $font->align('center');
+            $font->valign('middle');
+            $font->lineHeight(1.6);
+            $font->wrap(250);
+        });
+        $image->text($ticket->participante->apellido, 1400, 217, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#FFFFFF');
+            $font->size(40);
+            $font->align('center');
+            $font->valign('middle');
+            $font->lineHeight(1.6);
+            $font->wrap(250);
+        });
+        $image->text($ticket->participante->telefono, 1400, 327, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#FFFFFF');
+            $font->size(40);
+            $font->align('center');
+            $font->valign('middle');
+            $font->lineHeight(1.6);
+            $font->wrap(250);
+        });
+        $image->text($cedula, 1400, 427, function (FontFactory $font) {
+            $font->filename('fonts/sifonn-basic.otf');
+            $font->color('#FFFFFF');
+            $font->size(40);
+            $font->align('center');
+            $font->valign('middle');
+            $font->lineHeight(1.6);
+            $font->wrap(250);
+        });
+
+        $ruta_imagen = 'images/'.$ticket->numero->numero.'-'.$ticket->participante->nombre.'-'.$ticket->participante->apellido.'.jpg';
+
+        $image->save($ruta_imagen);
+
+        $affected = DB::table('tickets')
+              ->where('id', $ticket->id)
+              ->update([
+                'imagen' => $ruta_imagen,
+            ]);
+
+        }
+
+        $notification = array(
+            'message' => 'Tickets creados correctamente',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('participante.show', ['id' => $ticket->participante_id])->with($notification);
+    }
 }

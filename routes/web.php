@@ -68,7 +68,9 @@ Route::controller(TicketController::class)->group(function () {
     Route::get('/tickets', 'index')->name('tickets.index');
     Route::get('/ticket/{id}', 'show')->name('ticket.show');
     Route::get('/tickets/create/{numero?}', 'create')->name('tickets.create');
+    Route::get('/tickets/multiplecreate', 'multiplecreate')->name('tickets.multiplecreate');
     Route::post('/tickets/store', 'store')->name('tickets.store');
+    Route::post('/tickets/multiplestore', 'multiplestore')->name('tickets.multiplestore');
     Route::get('/ticket/{id}/pagar', 'pago')->name('ticket.pagar');
     Route::get('/ticket/{id}/delete', 'destroy')->name('ticket.destroy');
 })->middleware(['auth']);
