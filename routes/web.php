@@ -77,6 +77,7 @@ Route::controller(TicketController::class)->group(function () {
 
 Route::controller(SendMessageController::class)->group(function () {
     Route::get('/enviarws/{id}', 'sendmessage')->name('message.send');;
+    Route::get('/enviarmultiple/{id}', 'sendmultiple')->name('message.multiple');;
 })->middleware(['auth']);
 
 require __DIR__.'/auth.php';

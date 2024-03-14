@@ -18,7 +18,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-group-fill"></i>
+                        <i class="ri-user-star-line"></i>
                         <span>Participantes</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -29,7 +29,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-group-fill"></i>
+                        <i class="ri-group-line"></i>
                         <span>Vendedores</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -46,6 +46,18 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('tickets.index') }}">Lista</a></li>
                         <li><a href="{{ route('tickets.multiplecreate') }}">Crear</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-funds-line"></i>
+                        <span>Reportes</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Tickets</a></li>
+                        <li><a href="#">Participantes</a></li>
+                        <li><a href="#">Vendedores</a></li>
                     </ul>
                 </li>
 

@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             @endforeach
-
+                            <a href="{{ route('message.multiple',$participante->id) }}" class="btn btn-primary">Enviar tickets</a>
                         </div>
                     </div>
                 </div>
