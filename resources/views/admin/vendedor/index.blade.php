@@ -30,7 +30,7 @@
                             <p class="card-title-desc">Visualizar la lista de vendedores registrados</p>
 
                             <div class="table-responsive">
-                                <table class="table mb-0">
+                                <table id="datatable" class="table mb-0">
         
                                     <thead class="table-light">
                                         <tr>

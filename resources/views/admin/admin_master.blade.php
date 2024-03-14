@@ -183,6 +183,28 @@
 
     });
 </script>
+<script>
+        $(document).ready(function () {
+            var table = $('#datatable').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ items por página",
+                    "zeroRecords": "Sin resultados - disculpe",
+                    "info": "Mostrando pagina _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay items disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ total de items)",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Último",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "search":         "Buscar:",
+                }
+            });
+
+            table.column( 0 ).visible( false );
+        });
+    </script>
 </body>
 
 </html>
