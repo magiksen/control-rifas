@@ -55,9 +55,19 @@
                         <span>Reportes</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Tickets</a></li>
+                        <li><a href="{{ route('reporte.tickets') }}">Tickets</a></li>
                         <li><a href="#">Participantes</a></li>
                         <li><a href="#">Vendedores</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-funds-line"></i>
+                        <span>Opciones</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#">Rehacer Imagenes</a></li>
                     </ul>
                 </li>
 
