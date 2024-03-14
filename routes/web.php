@@ -74,6 +74,7 @@ Route::controller(TicketController::class)->group(function () {
     Route::post('/tickets/multiplestore', 'multiplestore')->name('tickets.multiplestore');
     Route::get('/ticket/{id}/pagar', 'pago')->name('ticket.pagar');
     Route::get('/ticket/{id}/delete', 'destroy')->name('ticket.destroy');
+    Route::get('/tickets/imagenes', 'reimagines')->name('ticket.imagenes');
 })->middleware(['auth']);
 
 Route::controller(SendMessageController::class)->group(function () {

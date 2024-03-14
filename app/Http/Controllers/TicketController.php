@@ -244,7 +244,7 @@ class TicketController extends Controller
             $font->align('center');
             $font->valign('middle');
             $font->lineHeight(1.6);
-            $font->wrap(250);
+            $font->wrap(300);
         });
         $image->text($ticket->participante->apellido, 1400, 217, function (FontFactory $font) {
             $font->filename('fonts/sifonn-basic.otf');
@@ -253,7 +253,7 @@ class TicketController extends Controller
             $font->align('center');
             $font->valign('middle');
             $font->lineHeight(1.6);
-            $font->wrap(250);
+            $font->wrap(300);
         });
         $image->text($ticket->participante->telefono, 1400, 327, function (FontFactory $font) {
             $font->filename('fonts/sifonn-basic.otf');
@@ -292,5 +292,71 @@ class TicketController extends Controller
         );
 
         return redirect()->route('participante.show', ['id' => $ticket->participante_id])->with($notification);
+    }
+
+    public function reimagines() {
+
+        $tickets = Ticket::all();
+        //dd($tickets);
+        
+
+        foreach($tickets as $ticket) {
+             $image = Image::read('images/original.jpg');
+
+             $image->text($ticket->numero->numero ?? "-", 600, 100, function (FontFactory $font) {
+                 $font->filename('fonts/sifonn-basic.otf');
+                 $font->color('#FFFFFF');
+                 $font->size(65);
+                 $font->align('center');
+                 $font->valign('middle');
+             });
+             $image->text($ticket->participante->nombre ?? "-", 1400, 100, function (FontFactory $font) {
+                 $font->filename('fonts/sifonn-basic.otf');
+                 $font->color('#FFFFFF');
+                 $font->size(40);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->lineHeight(1.6);
+                 $font->wrap(300);
+             });
+             $image->text($ticket->participante->apellido ?? "-", 1400, 217, function (FontFactory $font) {
+                 $font->filename('fonts/sifonn-basic.otf');
+                 $font->color('#FFFFFF');
+                 $font->size(40);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->lineHeight(1.6);
+                 $font->wrap(300);
+             });
+             $image->text($ticket->participante->telefono ?? "-", 1400, 327, function (FontFactory $font) {
+                 $font->filename('fonts/sifonn-basic.otf');
+                 $font->color('#FFFFFF');
+                 $font->size(40);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->lineHeight(1.6);
+                 $font->wrap(250);
+             });
+             $image->text($ticket->participante->cedula ?? "-", 1400, 427, function (FontFactory $font) {
+                 $font->filename('fonts/sifonn-basic.otf');
+                 $font->color('#FFFFFF');
+                 $font->size(40);
+                 $font->align('center');
+                 $font->valign('middle');
+                 $font->lineHeight(1.6);
+                 $font->wrap(250);
+             });
+     
+             $ruta_imagen = 'images/'.$ticket->numero->numero.'-'.$ticket->participante->nombre.'-'.$ticket->participante->apellido.'.jpg';
+     
+             $image->save($ruta_imagen);
+        }
+        
+         $notification = array(
+                 'message' => 'Imagenes recreadas correctamente',
+                 'alert-type' => 'success'
+             );
+
+         return redirect()->route('tickets.index')->with($notification);
     }
 }
