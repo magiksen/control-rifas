@@ -350,6 +350,12 @@ class TicketController extends Controller
              $ruta_imagen = 'images/'.$ticket->numero->numero.'-'.$ticket->participante->nombre.'-'.$ticket->participante->apellido.'.jpg';
      
              $image->save($ruta_imagen);
+
+             $affected = DB::table('tickets')
+              ->where('id', $ticket->id)
+              ->update([
+                'imagen' => $ruta_imagen,
+            ]);
         }
         
          $notification = array(
