@@ -11,6 +11,7 @@ use Intervention\Image\Laravel\Facades\Image;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Typography\FontFactory;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Geometry\Factories\RectangleFactory;
 
 class TicketController extends Controller
 {
@@ -364,5 +365,39 @@ class TicketController extends Controller
              );
 
          return redirect()->route('tickets.index')->with($notification);
+    }
+
+    public function cuadrocontrol() {
+        $numeros = Numero::query()->orderBy('numero', 'asc')->get();
+        
+
+        $image = Image::read('images/cuadrocontrol.jpg');
+
+        
+
+        $image->drawRectangle($columna, 0, function (RectangleFactory $rectangle) {
+                    $rectangle->size(40, 20); // width & height of rectangle
+                    $rectangle->background($tono); // background color of rectangle
+                    $rectangle->border('#000000', 0); // border color & size of rectangle
+                });
+        $image->text($numero->numero, $columna+3, 5, function (FontFactory $font) {
+                    $font->filename('fonts/calibri-regular.ttf');
+                    $font->color('#000000');
+                    $font->size(13);
+                    $font->align('left');
+                    $font->valign('top');
+                });
+                $columna = $columna + 30;
+           
+
+        $ruta_imagen = 'images/controlactual.jpg';
+     
+        $image->save($ruta_imagen);
+
+        $notification = array(
+            'message' => 'Imagen de control creada correctamente',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('tickets.index')->with($notification);
     }
 }
