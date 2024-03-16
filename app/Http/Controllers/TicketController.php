@@ -373,22 +373,46 @@ class TicketController extends Controller
 
         $image = Image::read('images/cuadrocontrol.jpg');
 
-        
+        $columna = 325;
+        $filacuadro = 0;
+        $filatexto = 0;
 
-        $image->drawRectangle($columna, 0, function (RectangleFactory $rectangle) {
-                    $rectangle->size(40, 20); // width & height of rectangle
-                    $rectangle->background($tono); // background color of rectangle
-                    $rectangle->border('#000000', 0); // border color & size of rectangle
-                });
-        $image->text($numero->numero, $columna+3, 5, function (FontFactory $font) {
-                    $font->filename('fonts/calibri-regular.ttf');
-                    $font->color('#000000');
-                    $font->size(13);
-                    $font->align('left');
-                    $font->valign('top');
-                });
+        foreach( $numeros->chunk(31) as $grupo ) {
+            foreach( $grupo as $numero) {
+                if($numero->ticket_id > 0) {
+                    $image->drawRectangle($columna, $filacuadro, function (RectangleFactory $rectangle) {
+                        $rectangle->size(65, 50); // width & height of rectangle
+                        $rectangle->background('#fdd5dd'); // background color of rectangle
+                        $rectangle->border('#fbc1cb', 1); // border color & size of rectangle
+                    });
+                    $image->text($numero->numero, $columna+3, $filatexto+7, function (FontFactory $font) {
+                        $font->filename('fonts/calibri-regular.ttf');
+                        $font->color('#921c32');
+                        $font->size(16);
+                        $font->align('left');
+                        $font->valign('middle');
+                    });
+                }else {
+                    $image->drawRectangle($columna, $filacuadro, function (RectangleFactory $rectangle) {
+                        $rectangle->size(65, 50); // width & height of rectangle
+                        $rectangle->background('#cceaed'); // background color of rectangle
+                        $rectangle->border('#b3e0e5', 1); // border color & size of rectangle
+                    });
+                    $image->text($numero->numero, $columna+3, $filatexto+7, function (FontFactory $font) {
+                        $font->filename('fonts/calibri-regular.ttf');
+                        $font->color('#005b64');
+                        $font->size(16);
+                        $font->align('left');
+                        $font->valign('middle');
+                    });
+                }
+
                 $columna = $columna + 30;
-           
+            }
+            $columna = 325;
+            $filacuadro = $filacuadro + 22;
+            $filatexto = $filatexto + 22;
+        }
 
         $ruta_imagen = 'images/controlactual.jpg';
      
