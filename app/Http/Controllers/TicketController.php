@@ -369,6 +369,86 @@ class TicketController extends Controller
 
         }
 
+        // CREAR LA IMAGEN DE CONTROL
+        $numeros = Numero::query()->orderBy('numero', 'asc')->get();
+        
+
+        $controlimage = Image::read('images/cuadrocontrol.jpg');
+
+        $columna = 325;
+        $filacuadro = 0;
+        $filatexto = 0;
+
+        foreach( $numeros->chunk(31) as $grupo ) {
+            foreach( $grupo as $numero) {
+                if($numero->ticket_id > 0) {
+                    $controlimage->drawRectangle($columna, $filacuadro, function (RectangleFactory $rectangle) {
+                        $rectangle->size(65, 50); // width & height of rectangle
+                        $rectangle->background('#fdd5dd'); // background color of rectangle
+                        $rectangle->border('#fbc1cb', 1); // border color & size of rectangle
+                    });
+                    $controlimage->text($numero->numero, $columna+3, $filatexto+7, function (FontFactory $font) {
+                        $font->filename('fonts/calibri-regular.ttf');
+                        $font->color('#921c32');
+                        $font->size(16);
+                        $font->align('left');
+                        $font->valign('middle');
+                    });
+                }else {
+                    $controlimage->drawRectangle($columna, $filacuadro, function (RectangleFactory $rectangle) {
+                        $rectangle->size(65, 50); // width & height of rectangle
+                        $rectangle->background('#cceaed'); // background color of rectangle
+                        $rectangle->border('#b3e0e5', 1); // border color & size of rectangle
+                    });
+                    $controlimage->text($numero->numero, $columna+3, $filatexto+7, function (FontFactory $font) {
+                        $font->filename('fonts/calibri-regular.ttf');
+                        $font->color('#005b64');
+                        $font->size(16);
+                        $font->align('left');
+                        $font->valign('middle');
+                    });
+                }
+
+                $columna = $columna + 30;
+            }
+            $columna = 325;
+            $filacuadro = $filacuadro + 22;
+            $filatexto = $filatexto + 22;
+        }
+
+        $ruta_imagen = 'images/controlactual.jpg';
+    
+        $controlimage->save($ruta_imagen);
+        // FIN CREAR LA IMAGEN DE CONTROL
+
+        // ENVIAR MENSAJE DE CONTROL A NUMERO
+        $imagenticket = 'images/controlactual.jpg';
+
+        $twilio_whatsapp_number = getenv('TWILIO_WHATSAPP_NUMBER');
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $contentSid = getenv("TWILIO_CONTENT_SID");
+        $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
+        $message = "Nuevo ticket comprado, aqui los numeros disponibles";
+        //$recipient = "whatsapp:+584242351778";
+        $recipient = "whatsapp:+584242809506";
+
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create($recipient, array(
+
+            'contentSid' => $contentSid, 
+
+            'from' => $messagingServiceSid, 
+
+            'contentVariables' => json_encode([
+
+                "1" => $imagenticket,
+
+            ]),
+
+        ));
+        // FIN ENVIAR MENSAJE DE CONTROL A NUMERO
+
         $notification = array(
             'message' => 'Tickets creados correctamente',
             'alert-type' => 'success'
