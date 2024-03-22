@@ -86,6 +86,7 @@ Route::controller(SendMessageController::class)->group(function () {
 
 Route::controller(ReporteController::class)->group(function () {
     Route::get('/reporte/tickets', 'reportetickets')->name('reporte.tickets');
+    Route::get('/reporte/participantes', 'reporteparticipantes')->name('reporte.participantes');
 })->middleware(['auth']);
 
 Route::controller(OptionController::class)->group(function () {

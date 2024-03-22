@@ -56,7 +56,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('reporte.tickets') }}">Tickets</a></li>
-                        <li><a href="#">Participantes</a></li>
+                        <li><a href="{{ route('reporte.participantes') }}">Participantes</a></li>
                         <li><a href="#">Vendedores</a></li>
                     </ul>
                 </li>
@@ -68,6 +68,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('opciones.index') }}">Generales</a></li>
+                        <li><a href="#">Usuarios</a></li>
                         <li><a href="javascript:void(0);" data-href="{{ route('ticket.imagenes') }}" class="imagenes-confirm">Recrear imagenes</a></li>
                     </ul>
                 </li>
