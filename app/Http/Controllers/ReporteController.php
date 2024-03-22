@@ -22,7 +22,6 @@ class ReporteController extends Controller
     }
 
     public function reporteparticipantes() {
-        //$participantes = Participante::all();
 
         $participantes = DB::table('participantes')
         ->join('tickets', 'participantes.id', '=', 'tickets.participante_id')
@@ -32,5 +31,17 @@ class ReporteController extends Controller
         ->get();
 
         return view('admin.reportes.participantes', ['participantes' => $participantes]);
+    }
+
+    public function reportevendedores() {
+
+        $vendedores = DB::table('vendedors')
+        ->join('tickets', 'vendedors.id', '=', 'tickets.vendedor_id')
+        ->select('vendedors.nombre as nombre', 'vendedors.apellido as apellido', DB::raw("count(tickets.vendedor_id) as count"))
+        ->groupBy('vendedors.nombre', 'vendedors.apellido')
+        ->orderBy('count', 'desc')
+        ->get();
+
+        return view('admin.reportes.vendedores', ['vendedores' => $vendedores]);
     }
 }

@@ -57,7 +57,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('reporte.tickets') }}">Tickets</a></li>
                         <li><a href="{{ route('reporte.participantes') }}">Participantes</a></li>
-                        <li><a href="#">Vendedores</a></li>
+                        <li><a href="{{ route('reporte.vendedores') }}">Vendedores</a></li>
                     </ul>
                 </li>
 

@@ -29,7 +29,7 @@
                             <p class="card-title-desc">Visualizar reportes de los tickets</p>
 
                             <div class="row mb-3">
-                               <p>Tickets Tomados:</p>
+                               <p>Tickets Comprados:</p>
                                <p class="alert-info col-1 p-2 rounded text-center"><strong>{{ $tomados }}</strong></p>
                             </div>
                             <div class="row mb-3">
