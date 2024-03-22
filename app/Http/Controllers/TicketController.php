@@ -580,6 +580,34 @@ class TicketController extends Controller
      
         $image->save($ruta_imagen);
 
+        // ENVIAR MENSAJE DE CONTROL A NUMERO
+        $imagenticket = 'images/controlactual.jpg';
+
+        $twilio_whatsapp_number = getenv('TWILIO_WHATSAPP_NUMBER');
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_AUTH_TOKEN");
+        $contentSid = getenv("TWILIO_CONTENT_SID");
+        $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
+        $message = "Nuevo ticket comprado, aqui los numeros disponibles";
+        //$recipient = "whatsapp:+584242351778";
+        $recipient = "whatsapp:+584242809506";
+
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create($recipient, array(
+
+            'contentSid' => $contentSid, 
+
+            'from' => $messagingServiceSid, 
+
+            'contentVariables' => json_encode([
+
+                "1" => $imagenticket,
+
+            ]),
+
+        ));
+        // FIN ENVIAR MENSAJE DE CONTROL A NUMERO
+
         $notification = array(
             'message' => 'Imagen de control creada correctamente',
             'alert-type' => 'success'
