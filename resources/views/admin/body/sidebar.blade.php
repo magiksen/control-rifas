@@ -46,7 +46,6 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('tickets.index') }}">Lista</a></li>
                         <li><a href="{{ route('tickets.multiplecreate') }}">Crear</a></li>
-                        <li><a href="{{ route('tickets.control') }}">Control</a></li>
                     </ul>
                 </li>
 

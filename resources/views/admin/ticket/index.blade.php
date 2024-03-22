@@ -24,11 +24,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                            <div style="padding:15px;">
+                                <a href="{{ route('tickets.control') }}" style="display:block;float:right;" type="button" class="btn btn-info">Crear imagen de control</a>
+                            </div>
                         <div class="card-body">
 
                             <h4 class="card-title">Lista de tickets</h4>
                             <p class="card-title-desc">Visualizar la lista de tickets registrados</p>
-
+                            
                             <div class="row">
                                 @foreach($numeros as $numero)
                                     <div class="col-xl-1 text-center m-2">
