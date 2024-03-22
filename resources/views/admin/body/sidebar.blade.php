@@ -63,10 +63,11 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-funds-line"></i>
+                        <i class="ri-settings-3-line"></i>
                         <span>Opciones</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('opciones.index') }}">Generales</a></li>
                         <li><a href="javascript:void(0);" data-href="{{ route('ticket.imagenes') }}" class="imagenes-confirm">Recrear imagenes</a></li>
                     </ul>
                 </li>

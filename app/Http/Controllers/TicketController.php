@@ -6,6 +6,7 @@ use App\Models\Ticket;
 use App\Models\Numero;
 use App\Models\Participante;
 use App\Models\Vendedor;
+use App\Models\Option;
 use Illuminate\Http\Request;
 use Intervention\Image\Laravel\Facades\Image;
 use Intervention\Image\ImageManager;
@@ -183,8 +184,8 @@ class TicketController extends Controller
             $contentSid = getenv("TWILIO_CONTENT_SID");
             $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
             $message = "Nuevo ticket comprado, aqui los numeros disponibles";
-            //$recipient = "whatsapp:+584242351778";
-            $recipient = "whatsapp:+584242809506";
+            $telefono = Option::where('id', 1)->first();
+            $recipient = 'whatsapp:+58'.$telefono->valor;
 
             $client = new Client($account_sid, $auth_token);
             $client->messages->create($recipient, array(
@@ -430,8 +431,8 @@ class TicketController extends Controller
         $contentSid = getenv("TWILIO_CONTENT_SID");
         $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
         $message = "Nuevo ticket comprado, aqui los numeros disponibles";
-        //$recipient = "whatsapp:+584242351778";
-        $recipient = "whatsapp:+584242809506";
+        $telefono = Option::where('id', 1)->first();
+        $recipient = 'whatsapp:+58'.$telefono->valor;
 
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($recipient, array(
@@ -589,8 +590,8 @@ class TicketController extends Controller
         $contentSid = getenv("TWILIO_CONTENT_SID");
         $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
         $message = "Nuevo ticket comprado, aqui los numeros disponibles";
-        //$recipient = "whatsapp:+584242351778";
-        $recipient = "whatsapp:+584242809506";
+        $telefono = Option::where('id', 1)->first();
+        $recipient = 'whatsapp:+58'.$telefono->valor;
 
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($recipient, array(
