@@ -9,13 +9,11 @@
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0">Ver Tickets</h4>
 
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tickets</a></li>
-                                <li class="breadcrumb-item active">Lista</li>
-                            </ol>
+                        <div class="ms-auto">
+                            <div class="btn-group">
+                                <a href="{{ route('tickets.control') }}" class="btn btn-info">Crear imagen de Control</a>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -24,9 +22,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                            <div style="padding:15px;">
-                                <a href="{{ route('tickets.control') }}" style="display:block;float:right;" type="button" class="btn btn-info">Crear imagen de control</a>
-                            </div>
                         <div class="card-body">
 
                             <h4 class="card-title">Lista de tickets</h4>

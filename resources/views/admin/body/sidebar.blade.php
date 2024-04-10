@@ -68,8 +68,18 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('opciones.index') }}">Generales</a></li>
-                        <li><a href="#">Usuarios</a></li>
+                        <li><a href="#">Roles y Permisos</a></li>
                         <li><a href="javascript:void(0);" data-href="{{ route('ticket.imagenes') }}" class="imagenes-confirm">Recrear imagenes</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-lock-2-line"></i>
+                        <span>Roles y Permisos</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('permisos') }}">Permisos</a></li>
+                        <li><a href="#">Agregar Permiso</a></li>
                     </ul>
                 </li>
 

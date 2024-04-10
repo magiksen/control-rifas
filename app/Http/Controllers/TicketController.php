@@ -184,7 +184,7 @@ class TicketController extends Controller
             $contentSid = getenv("TWILIO_CONTENT_SID");
             $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
             $message = "Nuevo ticket comprado, aqui los numeros disponibles";
-            $telefono = Option::where('id', 1)->first();
+            $telefono = DB::table('variables')->where('id', 1)->first();
             $recipient = 'whatsapp:+58'.$telefono->valor;
 
             $client = new Client($account_sid, $auth_token);
@@ -431,7 +431,7 @@ class TicketController extends Controller
         $contentSid = getenv("TWILIO_CONTENT_SID");
         $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
         $message = "Nuevo ticket comprado, aqui los numeros disponibles";
-        $telefono = Option::where('id', 1)->first();
+        $telefono = DB::table('variables')->where('id', 1)->first();
         $recipient = 'whatsapp:+58'.$telefono->valor;
 
         $client = new Client($account_sid, $auth_token);
@@ -590,7 +590,7 @@ class TicketController extends Controller
         $contentSid = getenv("TWILIO_CONTENT_SID");
         $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
         $message = "Nuevo ticket comprado, aqui los numeros disponibles";
-        $telefono = Option::where('id', 1)->first();
+        $telefono = DB::table('variables')->where('id', 1)->first();
         $recipient = 'whatsapp:+58'.$telefono->valor;
 
         $client = new Client($account_sid, $auth_token);

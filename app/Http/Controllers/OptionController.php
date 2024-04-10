@@ -13,14 +13,14 @@ class OptionController extends Controller
      */
     public function index()
     {
-        $opciones = Option::all();
+        $opciones = DB::table('variables')->get();
 
         return view('admin.opciones.index', ['opciones' => $opciones]);
     }
 
     public function edit($id)
     {
-        $opcion = Option::where('id', $id)->first();
+        $opcion = DB::table('variables')->where('id', $id)->first();
 
         return view('admin.opciones.edit', ['opcion' => $opcion]);
     }
@@ -30,7 +30,7 @@ class OptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $affected = DB::table('options')
+        $affected = DB::table('variables')
               ->where('id', $id)
               ->update([
                 'valor' => $request->valor,
