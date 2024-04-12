@@ -223,7 +223,7 @@
                 }
             });
 
-            table.column( 0 ).visible( false );
+            //table.column( 0 ).visible( false );
         });
     </script>
 </body>

@@ -28,7 +28,7 @@
                             <p class="card-title-desc">Visualizar la lista de permisos</p>
 
                             <div class="table-responsive">
-                                <table class="table mb-0">
+                                <table id="datatable" class="table mb-0">
         
                                     <thead class="table-light">
                                         <tr>
@@ -45,7 +45,7 @@
                                             <td>{{ $permiso->name}}</td>
                                             <td>{{ $permiso->group_name }}</td>
                                             <td>
-                                                <a href="#"><i class="ri-edit-line"></i></a>
+                                                <a href="{{ route('editar.permiso',$permiso->id) }}"><i class="ri-edit-line"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach      

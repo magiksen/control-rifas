@@ -100,7 +100,10 @@ Route::controller(OptionController::class)->group(function () {
 
 Route::controller(RoleController::class)->group(function () {
     Route::get('/permisos', 'permisos')->name('permisos');
-    Route::get('/permisos/creare', 'crearpermiso')->name('crear.permiso');
+    Route::get('/permisos/crear', 'crearpermiso')->name('crear.permiso');
+    Route::post('/permisos/store', 'storepermiso')->name('store.permiso');
+    Route::get('/permiso/{id}/edit', 'editpermiso')->name('editar.permiso');
+    Route::post('/permiso/{id}/edit', 'updatepermiso')->name('update.permiso');
 })->middleware(['auth']);
 
 require __DIR__.'/auth.php';
