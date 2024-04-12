@@ -50,6 +50,7 @@ Route::controller(ParticipanteController::class)->group(function () {
     Route::get('/participantes/create', 'create')->name('participantes.create');
     Route::post('/participantes/store', 'store')->name('participantes.store');
     Route::get('/participante/{id}/delete', 'destroy')->name('participante.destroy');
+    Route::get('/participante/{id}/pagar', 'pagoparticipante')->name('participante.pagar');
 })->middleware(['auth']);
 
 Route::controller(VendedorController::class)->group(function () {

@@ -40,48 +40,24 @@
                             <form method="post" action="#">
                                 @csrf
                             <div class="row mb-3">
-                                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                                <label for="name" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Nombre" id="nombre" name="nombre">
+                                    <input class="form-control" type="text" placeholder="Permiso" id="name" name="name">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+                                <label for="group_name" class="col-sm-2 col-form-label">Grupo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Apellido" id="apellido" name="apellido">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="cedula" class="col-sm-2 col-form-label">Cedula</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Cédula" id="cedula" name="cedula">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="correo" class="col-sm-2 col-form-label">Correo</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="email" placeholder="correo@correo.com" id="correo" name="correo">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="pais" class="col-sm-2 col-form-label">Pais</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select buscable" name="pais" id="pais">
-                                        @foreach($paises as $pais)
-                                        <option value="{{ $pais->pais_numero }}">{{ $pais->pais_nombre.' +'.$pais->pais_numero }}</option>
-                                        @endforeach
+                                    <select class="form-select buscable" name="group_name" id="group_name">
+                                        <option value="Participantes">Participantes</option>
+                                        <option value="Vendedores">Vendedores</option>
+                                        <option value="Tickets">Tickets</option>
+                                        <option value="Reportes">Reportes</option>
+                                        <option value="Opciones">Opciones</option>
+                                        <option value="Roles y Permisos">Roles y Permisos</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="row 
-                            <div class="row mb-3">
-                                <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="04241234567" id="telefono" name="telefono">
-                                </div>
-                            </div>
-                            <!-- end row -->
-
                             <button class="btn btn-primary" type="submit">Crear</button>
                             </form>
                         </div>

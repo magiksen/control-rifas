@@ -48,6 +48,29 @@
 
             </div><!-- end row -->
 
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Tickets del vendedor</h4>
+                            <p class="card-title-desc">Tickets obtenidos por el vendedor</p>
+                            
+                            <div class="row">
+                            @foreach($vendedor->tickets as $ticket)
+                            <div class="row mb-3 col-3">
+                                <div style="width:200px;">
+                                    <p><strong>Ticket #{{ $ticket->numero->numero }}</strong></p>
+                                    <a href="{{ route('ticket.show',$ticket->id) }}"><img class="img-thumbnail img-fluid" src="{{ asset($ticket->imagen) }}" alt="{{ $ticket->numero->numero }}"></a>
+                                </div>
+                            </div>
+                            @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- end row -->
         </div>

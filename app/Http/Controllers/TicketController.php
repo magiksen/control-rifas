@@ -277,7 +277,7 @@ class TicketController extends Controller
 
             return Redirect()->back()->with($notification);
     }
-
+   
     public function multiplecreate(?string $numero = null)
     {
         $participantes = Participante::all();

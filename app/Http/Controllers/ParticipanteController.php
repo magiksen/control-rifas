@@ -64,7 +64,11 @@ class ParticipanteController extends Controller
     {
         $participante = Participante::where('id', $id)->first();
 
-        return view('admin.participante.show', ['participante' => $participante]);
+        $allTicketsPaid = collect($participante->tickets)->every(function ($ticket) {
+            return $ticket['pago'] === 1;
+        });
+
+        return view('admin.participante.show', ['participante' => $participante, 'allTicketsPaid' => $allTicketsPaid]);
     }
 
     /**
@@ -121,5 +125,21 @@ class ParticipanteController extends Controller
         );
 
         return Redirect()->back()->with($notification);
+    }
+
+    public function pagoparticipante($id) 
+    {
+            $affected = DB::table('tickets')
+                ->where('participante_id', $id)
+                ->update([
+                    'pago' => 1,
+                ]);
+            
+            $notification = array(
+                'message' => 'Los tickets han sido pagados correctamente',
+                'alert-type' => 'success'
+            );
+
+            return Redirect()->back()->with($notification);
     }
 }
