@@ -49,12 +49,16 @@ class ParticipanteController extends Controller
 
         $participante->save();
 
+        $allTicketsPaid = collect($participante->tickets)->every(function ($ticket) {
+            return $ticket['pago'] === 1;
+        });
+
         $notification = array(
             'message' => 'Participante creado correctamente',
             'alert-type' => 'success'
         );
         
-        return view('admin.participante.show', ['participante' => $participante])->with($notification);
+        return view('admin.participante.show', ['participante' => $participante, 'allTicketsPaid' => $allTicketsPaid])->with($notification);
     }
 
     /**

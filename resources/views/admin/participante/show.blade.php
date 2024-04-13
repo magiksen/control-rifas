@@ -59,28 +59,34 @@
                             <p class="card-title-desc">Tickets obtenidos por el participante</p>
                             
                             <div class="row">
-                            @foreach($participante->tickets as $ticket)
-                            <div class="row mb-3 col-3">
-                                <div style="width:200px;">
-                                    <p><strong>Ticket #{{ $ticket->numero->numero }}</strong></p>
-                                    @if($ticket->pago == 1)
-                                    <div class="alert alert-success col-12" role="alert">
-                                        Ticket esta pago
+                            @if(count($participante->tickets) != 0)
+                                @foreach($participante->tickets as $ticket)
+                                <div class="row mb-3 col-3">
+                                    <div style="width:200px;">
+                                        <p><strong>Ticket #{{ $ticket->numero->numero }}</strong></p>
+                                        @if($ticket->pago == 1)
+                                        <div class="alert alert-success col-12" role="alert">
+                                            Ticket esta pago
+                                        </div>
+                                        @else
+                                        <div class="alert alert-danger col-12" role="alert">
+                                            Ticket no ha sido pagado
+                                        </div>
+                                        @endif
+                                        <a href="{{ route('ticket.show',$ticket->id) }}"><img class="img-thumbnail img-fluid" src="{{ asset($ticket->imagen) }}" alt="{{ $ticket->numero->numero }}"></a>
                                     </div>
-                                    @else
-                                    <div class="alert alert-danger col-12" role="alert">
-                                        Ticket no ha sido pagado
-                                    </div>
-                                    @endif
-                                    <a href="{{ route('ticket.show',$ticket->id) }}"><img class="img-thumbnail img-fluid" src="{{ asset($ticket->imagen) }}" alt="{{ $ticket->numero->numero }}"></a>
                                 </div>
-                            </div>
-                            @endforeach
-                            </div>
-                            @if($allTicketsPaid)
-                            <a href="{{ route('message.multiple',$participante->id) }}" class="btn btn-primary">Enviar tickets</a>
+                                @endforeach
+                                </div>
+                                @if($allTicketsPaid)
+                                <a href="{{ route('message.multiple',$participante->id) }}" class="btn btn-primary">Enviar tickets</a>
+                                @else
+                                <a href="{{ route('participante.pagar',$participante->id) }}" class="btn btn-success">Pagar tickets</a>
+                                @endif
                             @else
-                            <a href="{{ route('participante.pagar',$participante->id) }}" class="btn btn-success">Pagar tickets</a>
+                            <div class="alert alert-danger col-5" role="alert">
+                                El participante no ha comprado ningun ticket
+                            </div>
                             @endif
                         </div>
                     </div>
