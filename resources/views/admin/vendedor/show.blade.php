@@ -54,15 +54,20 @@
                         <div class="card-body">
 
                             <h4 class="card-title">Tickets del vendedor</h4>
-                            <p class="card-title-desc">Tickets obtenidos por el vendedor</p>
-                            
+                            <p class="card-title-desc">Tickets vendidos por el vendedor</p>
+                            @use('App\Models\Participante')
                             <div class="row">
-                            @foreach($vendedor->tickets as $ticket)
-                            <div class="row mb-3 col-3">
-                                <div style="width:200px;">
-                                    <p><strong>Ticket #{{ $ticket->numero->numero }}</strong></p>
-                                    <a href="{{ route('ticket.show',$ticket->id) }}"><img class="img-thumbnail img-fluid" src="{{ asset($ticket->imagen) }}" alt="{{ $ticket->numero->numero }}"></a>
-                                </div>
+                            @foreach($ticketsVendidos as $participanteId => $tickets)
+                            <div class="row mb-3 col-12">
+                                    <h4><strong>Participante: {{ Participante::find($participanteId)->nombre }} {{ Participante::find($participanteId)->apellido }}</strong></h4>
+                                    <div class="row">
+                                         @foreach ($tickets as $ticket)
+                                        <div class="col-3">
+                                            <p><strong>Ticket #{{ $ticket->numero->numero }}</strong></p>
+                                            <a href="{{ route('ticket.show',$ticket->id) }}"><img class="img-thumbnail img-fluid" src="{{ asset($ticket->imagen) }}" alt="{{ $ticket->numero->numero }}"></a>
+                                        </div>
+                                        @endforeach    
+                                    </div>
                             </div>
                             @endforeach
                             </div>

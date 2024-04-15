@@ -41,7 +41,7 @@
                                     <tbody>
                                         @foreach($vendedores as $vendedor)
                                         <tr>
-                                            <td>{{ $vendedor->nombre }}</td>
+                                            <td><a href="">{{ $vendedor->nombre }}</a></td>
                                             <td>{{ $vendedor->apellido }}</td>
                                             <td><strong>{{ $vendedor->count }}</strong></td>
                                         </tr>

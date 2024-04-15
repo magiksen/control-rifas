@@ -58,7 +58,9 @@ class VendedorController extends Controller
     {
         $vendedor = Vendedor::where('id', $id)->first();
 
-        return view('admin.vendedor.show', ['vendedor' => $vendedor]);
+        $ticketsVendidos = $vendedor->tickets->groupBy('participante_id');
+
+        return view('admin.vendedor.show', ['vendedor' => $vendedor, 'ticketsVendidos' => $ticketsVendidos]);
     }
 
     /**
