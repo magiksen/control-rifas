@@ -42,76 +42,79 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::controller(ParticipanteController::class)->group(function () {
-    Route::get('/participantes', 'index')->name('participantes.index');
-    Route::get('/participante/{id}', 'show')->name('participante.show');
-    Route::get('/participante/{id}/edit', 'edit')->name('participante.edit');
-    Route::post('/participante/{id}/edit', 'update')->name('participante.update');
-    Route::get('/participantes/create', 'create')->name('participantes.create');
-    Route::post('/participantes/store', 'store')->name('participantes.store');
-    Route::get('/participante/{id}/delete', 'destroy')->name('participante.destroy');
-    Route::get('/participante/{id}/pagar', 'pagoparticipante')->name('participante.pagar');
-})->middleware(['auth']);
+Route::middleware('auth')->group(function () {
+    Route::controller(ParticipanteController::class)->group(function () {
+        Route::get('/participantes', 'index')->name('participantes.index');
+        Route::get('/participante/{id}', 'show')->name('participante.show');
+        Route::get('/participante/{id}/edit', 'edit')->name('participante.edit');
+        Route::post('/participante/{id}/edit', 'update')->name('participante.update');
+        Route::get('/participantes/create', 'create')->name('participantes.create');
+        Route::post('/participantes/store', 'store')->name('participantes.store');
+        Route::get('/participante/{id}/delete', 'destroy')->name('participante.destroy');
+        Route::get('/participante/{id}/pagar', 'pagoparticipante')->name('participante.pagar');
+    });
 
-Route::controller(VendedorController::class)->group(function () {
-    Route::get('/vendedores', 'index')->name('vendedores.index');
-    Route::get('/vendedor/{id}', 'show')->name('vendedor.show');
-    Route::get('/vendedor/{id}/edit', 'edit')->name('vendedor.edit');
-    Route::post('/vendedor/{id}/edit', 'update')->name('vendedor.update');
-    Route::get('/vendedores/create', 'create')->name('vendedores.create');
-    Route::post('/vendedores/store', 'store')->name('vendedores.store');
-    Route::get('/vendedor/{id}/delete', 'destroy')->name('vendedor.destroy');
-})->middleware(['auth']);
+    Route::controller(VendedorController::class)->group(function () {
+        Route::get('/vendedores', 'index')->name('vendedores.index');
+        Route::get('/vendedor/{id}', 'show')->name('vendedor.show');
+        Route::get('/vendedor/{id}/edit', 'edit')->name('vendedor.edit');
+        Route::post('/vendedor/{id}/edit', 'update')->name('vendedor.update');
+        Route::get('/vendedores/create', 'create')->name('vendedores.create');
+        Route::post('/vendedores/store', 'store')->name('vendedores.store');
+        Route::get('/vendedor/{id}/delete', 'destroy')->name('vendedor.destroy');
+    });
 
-Route::controller(NumeroController::class)->group(function () {
-    Route::get('/numeros', 'index')->name('numeros.index');
-    Route::get('/numero/{id}', 'show')->name('numero.show');
-})->middleware(['auth']);
+    Route::controller(NumeroController::class)->group(function () {
+        Route::get('/numeros', 'index')->name('numeros.index');
+        Route::get('/numero/{id}', 'show')->name('numero.show');
+    });
 
-Route::controller(TicketController::class)->group(function () {
-    Route::get('/tickets', 'index')->name('tickets.index');
-    Route::get('/ticket/{id}', 'show')->name('ticket.show');
-    Route::get('/tickets/create/{numero?}', 'create')->name('tickets.create');
-    Route::get('/tickets/multiplecreate', 'multiplecreate')->name('tickets.multiplecreate');
-    Route::post('/tickets/store', 'store')->name('tickets.store');
-    Route::post('/tickets/multiplestore', 'multiplestore')->name('tickets.multiplestore');
-    Route::get('/ticket/{id}/pagar', 'pago')->name('ticket.pagar');
-    Route::get('/ticket/{id}/delete', 'destroy')->name('ticket.destroy');
-    Route::get('/tickets/imagenes', 'reimagines')->name('ticket.imagenes');
-    Route::get('/tickets/control', 'cuadrocontrol')->name('tickets.control');
-})->middleware(['auth']);
+    Route::controller(TicketController::class)->group(function () {
+        Route::get('/tickets', 'index')->name('tickets.index');
+        Route::get('/ticket/{id}', 'show')->name('ticket.show');
+        Route::get('/tickets/create/{numero?}', 'create')->name('tickets.create');
+        Route::get('/tickets/multiplecreate', 'multiplecreate')->name('tickets.multiplecreate');
+        Route::post('/tickets/store', 'store')->name('tickets.store');
+        Route::post('/tickets/multiplestore', 'multiplestore')->name('tickets.multiplestore');
+        Route::get('/ticket/{id}/pagar', 'pago')->name('ticket.pagar');
+        Route::get('/ticket/{id}/delete', 'destroy')->name('ticket.destroy');
+        Route::get('/tickets/imagenes', 'reimagines')->name('ticket.imagenes');
+        Route::get('/tickets/control', 'cuadrocontrol')->name('tickets.control');
+    });
 
-Route::controller(SendMessageController::class)->group(function () {
-    Route::get('/enviarws/{id}', 'sendmessage')->name('message.send');
-    Route::get('/enviarmultiple/{id}', 'sendmultiple')->name('message.multiple');
-})->middleware(['auth']);
+    Route::controller(SendMessageController::class)->group(function () {
+        Route::get('/enviarws/{id}', 'sendmessage')->name('message.send');
+        Route::get('/enviarmultiple/{id}', 'sendmultiple')->name('message.multiple');
+    });
 
-Route::controller(ReporteController::class)->group(function () {
-    Route::get('/reporte/tickets', 'reportetickets')->name('reporte.tickets');
-    Route::get('/reporte/participantes', 'reporteparticipantes')->name('reporte.participantes');
-    Route::get('/reporte/vendedores', 'reportevendedores')->name('reporte.vendedores');
-})->middleware(['auth']);
+    Route::controller(ReporteController::class)->group(function () {
+        Route::get('/reporte/tickets', 'reportetickets')->name('reporte.tickets');
+        Route::get('/reporte/participantes', 'reporteparticipantes')->name('reporte.participantes');
+        Route::get('/reporte/vendedores', 'reportevendedores')->name('reporte.vendedores');
+    });
 
-Route::controller(OptionController::class)->group(function () {
-    Route::get('/opciones', 'index')->name('opciones.index');
-    Route::get('/opcion/{id}/edit', 'edit')->name('opcion.edit');
-    Route::post('/opcion/{id}/edit', 'update')->name('opcion.update');
-})->middleware(['auth']);
+    Route::controller(OptionController::class)->group(function () {
+        Route::get('/opciones', 'index')->name('opciones.index');
+        Route::get('/opcion/{id}/edit', 'edit')->name('opcion.edit');
+        Route::post('/opcion/{id}/edit', 'update')->name('opcion.update');
+    });
 
-Route::controller(RoleController::class)->group(function () {
-    Route::get('/permisos', 'permisos')->name('permisos');
-    Route::get('/permisos/crear', 'crearpermiso')->name('crear.permiso');
-    Route::post('/permisos/store', 'storepermiso')->name('store.permiso');
-    Route::get('/permiso/{id}/edit', 'editpermiso')->name('editar.permiso');
-    Route::post('/permiso/{id}/edit', 'updatepermiso')->name('update.permiso');
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/permisos', 'permisos')->name('permisos');
+        Route::get('/permisos/crear', 'crearpermiso')->name('crear.permiso');
+        Route::post('/permisos/store', 'storepermiso')->name('store.permiso');
+        Route::get('/permiso/{id}/edit', 'editpermiso')->name('editar.permiso');
+        Route::post('/permiso/{id}/edit', 'updatepermiso')->name('update.permiso');
 
-    //ROLES
+        //ROLES
 
-    Route::get('/roles', 'roles')->name('roles');
-    Route::get('/roles/crear', 'addrole')->name('crear.rol');
-    Route::post('/roles/store', 'storerole')->name('store.rol');
-    Route::get('/role/{id}/edit', 'editrole')->name('editar.rol');
-    Route::post('/role/{id}/edit', 'updaterole')->name('update.rol');
-})->middleware(['auth']);
+        Route::get('/roles', 'roles')->name('roles');
+        Route::get('/roles/crear', 'addrole')->name('crear.rol');
+        Route::post('/roles/store', 'storerole')->name('store.rol');
+        Route::get('/role/{id}/edit', 'editrole')->name('editar.rol');
+        Route::post('/role/{id}/edit', 'updaterole')->name('update.rol');
+    });
+
+});
 
 require __DIR__.'/auth.php';
