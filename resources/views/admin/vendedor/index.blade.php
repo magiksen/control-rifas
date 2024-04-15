@@ -43,9 +43,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($vendedores as $vendedor)
+                                        @foreach($vendedores as $key => $vendedor)
                                         <tr>
-                                            <th scope="row">{{ $vendedor->id }}</th>
+                                            <th scope="row">{{ $key+1 }}</th>
                                             <td>{{ $vendedor->nombre }}</td>
                                             <td>{{ $vendedor->apellido }}</td>
                                             <td>{{ $vendedor->cedula }}</td>

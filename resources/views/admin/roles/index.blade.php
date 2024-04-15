@@ -11,7 +11,7 @@
 
                         <div class="ms-auto">
                             <div class="btn-group">
-                                <a href="{{ route('crear.permiso') }}" class="btn btn-primary">Agregar permiso</a>
+                                <a href="{{ route('crear.rol') }}" class="btn btn-primary">Agregar Roles</a>
                             </div>
                         </div>
                     </div>
@@ -24,8 +24,8 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Lista de permisos</h4>
-                            <p class="card-title-desc">Visualizar la lista de permisos</p>
+                            <h4 class="card-title">Lista de roles</h4>
+                            <p class="card-title-desc">Visualizar la lista de roles</p>
 
                             <div class="table-responsive">
                                 <table id="datatable" class="table mb-0">
@@ -33,19 +33,17 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th>#</th>
-                                            <th>Permiso</th>
-                                            <th>Grupo</th>
+                                            <th>Role</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($permisos as $key => $permiso)
+                                        @foreach($roles as $key => $role)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $permiso->name}}</td>
-                                            <td>{{ $permiso->group_name }}</td>
+                                            <td>{{ $role->name}}</td>
                                             <td>
-                                                <a href="{{ route('editar.permiso',$permiso->id) }}"><i class="ri-edit-line"></i></a>
+                                                <a href="{{ route('editar.rol', $role->id ) }}"><i class="ri-edit-line"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach      

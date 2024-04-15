@@ -44,9 +44,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($participantes as $participante)
+                                        @foreach($participantes as $key => $participante)
                                         <tr>
-                                            <th scope="row">{{ $participante->id }}</th>
+                                            <th scope="row">{{ $key+1 }}</th>
                                             <td>{{ $participante->nombre }}</td>
                                             <td>{{ $participante->apellido }}</td>
                                             <td>{{ $participante->cedula }}</td>

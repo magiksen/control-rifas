@@ -104,6 +104,14 @@ Route::controller(RoleController::class)->group(function () {
     Route::post('/permisos/store', 'storepermiso')->name('store.permiso');
     Route::get('/permiso/{id}/edit', 'editpermiso')->name('editar.permiso');
     Route::post('/permiso/{id}/edit', 'updatepermiso')->name('update.permiso');
+
+    //ROLES
+
+    Route::get('/roles', 'roles')->name('roles');
+    Route::get('/roles/crear', 'addrole')->name('crear.rol');
+    Route::post('/roles/store', 'storerole')->name('store.rol');
+    Route::get('/role/{id}/edit', 'editrole')->name('editar.rol');
+    Route::post('/role/{id}/edit', 'updaterole')->name('update.rol');
 })->middleware(['auth']);
 
 require __DIR__.'/auth.php';

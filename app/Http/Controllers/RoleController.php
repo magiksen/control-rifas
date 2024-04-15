@@ -56,4 +56,54 @@ class RoleController extends Controller
 
       return Redirect()->route('permisos')->with($notification);
     }
+
+    // ROLES
+
+    public function roles() {
+        $roles = Role::all();
+
+        return view('admin.roles.index', compact('roles'));
+    }
+
+    public function addrole() {
+
+        return view('admin.roles.create');
+    }
+
+    public function storerole(Request $request) {
+
+        $roles = Role::create([
+            'name' => $request->name,
+        ]);
+
+        $notification = array(
+            'message' => 'Role creado correctamente',
+            'alert-type' => 'success'
+        );
+        
+        return redirect()->route('roles')->with($notification);
+
+    }
+
+    public function editrole($id) {
+
+        $role = Role::findOrFail($id);
+
+        return view('admin.roles.edit', ['role' => $role]);
+    }
+
+    public function updaterole(Request $request, $id) {
+        
+        Role::findOrFail($id)->update([
+            'name' => $request->name,
+        ]);
+      
+        $notification = array(
+            'message' => 'Role actualizado correctamente',
+            'alert-type' => 'success'
+        );
+
+      return Redirect()->route('roles')->with($notification);
+    }
+
 }
