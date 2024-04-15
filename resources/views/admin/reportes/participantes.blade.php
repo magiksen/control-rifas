@@ -41,7 +41,7 @@
                                     <tbody>
                                         @foreach($participantes as $participante)
                                         <tr>
-                                            <td>{{ $participante->nombre }}</td>
+                                            <td><a href="{{ route('participante.show',$participante->id) }}">{{ $participante->nombre }}</a></td>
                                             <td>{{ $participante->apellido }}</td>
                                             <td><strong>{{ $participante->count }}</strong></td>
                                         </tr>

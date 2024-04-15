@@ -25,8 +25,8 @@ class ReporteController extends Controller
 
         $participantes = DB::table('participantes')
         ->join('tickets', 'participantes.id', '=', 'tickets.participante_id')
-        ->select('participantes.nombre as nombre', 'participantes.apellido as apellido', DB::raw("count(tickets.participante_id) as count"))
-        ->groupBy('participantes.nombre', 'participantes.apellido')
+        ->select('participantes.nombre as nombre', 'participantes.apellido as apellido', 'participantes.id as id', DB::raw("count(tickets.participante_id) as count"))
+        ->groupBy('participantes.nombre', 'participantes.apellido', 'participantes.id')
         ->orderBy('count', 'desc')
         ->get();
 
@@ -37,8 +37,8 @@ class ReporteController extends Controller
 
         $vendedores = DB::table('vendedors')
         ->join('tickets', 'vendedors.id', '=', 'tickets.vendedor_id')
-        ->select('vendedors.nombre as nombre', 'vendedors.apellido as apellido', DB::raw("count(tickets.vendedor_id) as count"))
-        ->groupBy('vendedors.nombre', 'vendedors.apellido')
+        ->select('vendedors.nombre as nombre', 'vendedors.apellido as apellido', 'vendedors.id as id', DB::raw("count(tickets.vendedor_id) as count"))
+        ->groupBy('vendedors.nombre', 'vendedors.apellido', 'vendedors.id')
         ->orderBy('count', 'desc')
         ->get();
 
