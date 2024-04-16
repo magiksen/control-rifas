@@ -225,7 +225,16 @@
 
             //table.column( 0 ).visible( false );
         });
-    </script>
+</script>
+<script type="text/javascript">
+    $('#permisosall').click(function(){
+        if($(this).is(':checked')) {
+            $('input[type = checkbox]').prop('checked',true);
+        }else{
+            $('input[type = checkbox]').prop('checked',false);
+        }
+    });
+</script>
 </body>
 
 </html>

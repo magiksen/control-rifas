@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -106,4 +108,58 @@ class RoleController extends Controller
       return Redirect()->route('roles')->with($notification);
     }
 
+    // Add Roles en permisos
+
+    public function addrolespermisos() {
+        $roles = Role::all();
+        $permisos = Permission::all();
+        $permission_groups = User::getpermissionGroups();
+
+        return view('admin.roles.permisos', compact('roles', 'permisos', 'permission_groups'));
+    }
+
+    public function storerolespermisos(Request $request) {
+        $data = array();
+        $permissions = $request->permission;
+
+        foreach($permissions as $key => $item) {
+            $data['role_id'] = $request->role_id;
+            $data['permission_id'] = $item;
+
+            DB::table('role_has_permissions')->insert($data);
+        }
+
+        $notification = array(
+            'message' => 'Rol y permiso insertado correctamente',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->route('roles')->with($notification);
+    }
+
+    public function editarrolespermisos($id) {
+        $role =  Role::findOrFail($id);
+        $permissions = Permission::all();
+        $permission_groups = User::getpermissionGroups();
+
+        return view('admin.roles.edit_permisos', compact('role', 'permissions', 'permission_groups'));
+    }
+
+    public function updaterolespermisos(Request $request, $id) {
+        $role =  Role::findOrFail($id);
+        $permissions = $request->permission;
+
+        //dd($permissions);
+
+        if(!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+
+        $notification = array(
+            'message' => 'Rol y permiso actualizado correctamente',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->route('roles')->with($notification);
+    }
 }

@@ -29,10 +29,10 @@
                             <p class="card-title-desc">Visualizar los datos del vendedor</p>
                             
                             <div class="row mb-3">
-                               <p>Nombre: {{ $vendedor->nombre }}</p>
+                               <p>Nombre: {{ $vendedor->name }}</p>
                             </div>
                             <div class="row mb-3">
-                                <p>Apellido: {{ $vendedor->apellido }}</p>
+                                <p>Correo: {{ $vendedor->email }}</p>
                             </div>
                             <div class="row mb-3">
                                 <p>Cedula: {{ $vendedor->cedula }}</p>
@@ -47,7 +47,8 @@
                 </div>
 
             </div><!-- end row -->
-
+            @use('App\Models\Participante')
+            @if($ticketsVendidos !== 0)
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -55,7 +56,7 @@
 
                             <h4 class="card-title">Tickets del vendedor</h4>
                             <p class="card-title-desc">Tickets vendidos por el vendedor</p>
-                            @use('App\Models\Participante')
+                            
                             <div class="row">
                             @foreach($ticketsVendidos as $participanteId => $tickets)
                             <div class="row mb-3 col-12">
@@ -75,6 +76,11 @@
                     </div>
                 </div>
             </div>
+            @else
+            <div class="alert alert-danger col-12" role="alert">
+                Sin Tickets Vendidos
+            </div>
+            @endif
 
 
             <!-- end row -->

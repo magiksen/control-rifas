@@ -24,7 +24,7 @@ class Ticket extends Model
     }
     public function Vendedor()
     {
-        return $this->belongsTo(Vendedor::class);
+        return $this->belongsTo(User::class);
     }
     public function Numero()
     {

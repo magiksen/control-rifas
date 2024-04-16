@@ -79,6 +79,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('permisos') }}">Permisos</a></li>
                         <li><a href="{{ route('roles') }}">Roles</a></li>
+                        <li><a href="{{ route('add.roles.permiso') }}">Roles en permisos</a></li>
                     </ul>
                 </li>
 

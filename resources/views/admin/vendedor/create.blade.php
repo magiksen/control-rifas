@@ -31,21 +31,21 @@
                             <form method="post" action="{{ route('vendedores.store') }}">
                                 @csrf
                             <div class="row mb-3">
-                                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                                <label for="name" class="col-sm-2 col-form-label">Nombre y Apellido</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Nombre" id="nombre" name="nombre">
+                                    <input class="form-control" type="text" placeholder="Nombre y Apellido" id="name" name="name" :value="old('name')" required>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+                            <div class="mb-3 row">
+                                <label for="email" class="col-sm-2 col-form-label">Correo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Apellido" id="apellido" name="apellido">
+                                    <input class="form-control" id="email" name="email" :value="old('email')"  type="email" required placeholder="Email">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="cedula" class="col-sm-2 col-form-label">Cedula</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" placeholder="Cédula" id="cedula" name="cedula">
+                                    <input class="form-control" type="text" placeholder="Cédula" id="cedula" name="cedula" :value="old('cedula')">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -61,7 +61,20 @@
                             <div class="row mb-3">
                                 <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="tel" placeholder="04241234567" id="telefono" name="telefono">
+                                    <input class="form-control" type="tel" placeholder="04241234567" id="telefono" name="telefono" :value="old('telefono')">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="password" name="password" type="password" required placeholder="Contraseña" autocomplete="new-password">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="password_confirmation" class="col-sm-2 col-form-label">Confirmar Contraseña</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="password_confirmation" name="password_confirmation" type="password" required placeholder="Repetir contraseña">
                                 </div>
                             </div>
                             <!-- end row -->

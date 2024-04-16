@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vendedor;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class VendedorController extends Controller
 {
@@ -13,7 +17,7 @@ class VendedorController extends Controller
      */
     public function index()
     {
-        $vendedores = Vendedor::all();
+        $vendedores = User::where('role_id', 3)->get();
 
         return view('admin.vendedor.index', compact('vendedores'));
     }
@@ -34,14 +38,33 @@ class VendedorController extends Controller
      */
     public function store(Request $request)
     {
-        $vendedor = new Vendedor;
-        $vendedor->nombre = $request->nombre;
-        $vendedor->apellido = $request->apellido;
-        $vendedor->cedula = $request->cedula;
-        $vendedor->telefono = $request->telefono;
-        $vendedor->pais = $request->pais;
+        // $vendedor = new Vendedor;
+        // $vendedor->nombre = $request->nombre;
+        // $vendedor->apellido = $request->apellido;
+        // $vendedor->cedula = $request->cedula;
+        // $vendedor->telefono = $request->telefono;
+        // $vendedor->pais = $request->pais;
 
-        $vendedor->save();
+        // $vendedor->save();
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'cedula' => ['required', 'string', 'max:255'],
+            'telefono' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $vendedor = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'cedula' => $request->cedula,
+            'telefono' => $request->telefono,
+            'pais' => $request->pais,
+            'role_id' => 3
+        ]);
+
 
         $notification = array(
             'message' => 'Vendedor creado correctamente',
@@ -56,9 +79,15 @@ class VendedorController extends Controller
      */
     public function show($id)
     {
-        $vendedor = Vendedor::where('id', $id)->first();
+        $vendedor = User::where('id', $id)->first();
 
         $ticketsVendidos = $vendedor->tickets->groupBy('participante_id');
+
+        if(count($ticketsVendidos) < 1) {
+            $ticketsVendidos = 0;
+        }
+
+        //dd($ticketsVendidos);
 
         return view('admin.vendedor.show', ['vendedor' => $vendedor, 'ticketsVendidos' => $ticketsVendidos]);
     }
@@ -68,7 +97,7 @@ class VendedorController extends Controller
      */
     public function edit($id)
     {
-        $vendedor = Vendedor::where('id', $id)->first();
+        $vendedor = User::findOrFail($id);
 
         $paises = DB::table('paises')->get();
 

@@ -113,6 +113,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/roles/store', 'storerole')->name('store.rol');
         Route::get('/role/{id}/edit', 'editrole')->name('editar.rol');
         Route::post('/role/{id}/edit', 'updaterole')->name('update.rol');
+
+        //Roles en permisos
+
+        Route::get('/add/roles/permisos', 'addrolespermisos')->name('add.roles.permiso');
+        Route::post('/roles/permisos/store', 'storerolespermisos')->name('store.role.permission');
+        Route::get('/edit/roles/permisos/{id}', 'editarrolespermisos')->name('editar.roles.permisos');
+        Route::post('/roles/permisos/update/{id}', 'updaterolespermisos')->name('update.role.permission');
     });
 
 });

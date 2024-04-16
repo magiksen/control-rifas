@@ -43,6 +43,7 @@
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $role->name}}</td>
                                             <td>
+                                                <a href="{{ route('editar.roles.permisos', $role->id ) }}"><i class="ri-eye-line"></i></a>
                                                 <a href="{{ route('editar.rol', $role->id ) }}"><i class="ri-edit-line"></i></a>
                                             </td>
                                         </tr>

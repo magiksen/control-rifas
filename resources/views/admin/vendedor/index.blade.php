@@ -36,7 +36,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nombre</th>
-                                            <th>Apellido</th>
+                                            <th>Correo</th>
                                             <th>Cédula</th>
                                             <th>Teléfono</th>
                                             <th></th>
@@ -46,8 +46,8 @@
                                         @foreach($vendedores as $key => $vendedor)
                                         <tr>
                                             <th scope="row">{{ $key+1 }}</th>
-                                            <td>{{ $vendedor->nombre }}</td>
-                                            <td>{{ $vendedor->apellido }}</td>
+                                            <td>{{ $vendedor->name }}</td>
+                                            <td>{{ $vendedor->email }}</td>
                                             <td>{{ $vendedor->cedula }}</td>
                                             <td>{{ $vendedor->telefono }}</td>
                                             <td>

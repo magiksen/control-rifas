@@ -50,12 +50,6 @@
 
                         <div class="form-group mb-3 row">
                             <div class="col-12">
-                                <input class="form-control" id="username" name="username" :value="old('username')" type="text" required autofocus placeholder="Usuario">
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-3 row">
-                            <div class="col-12">
                                 <input class="form-control" id="email" name="email" :value="old('email')"  type="email" required placeholder="Email">
                             </div>
                         </div>
