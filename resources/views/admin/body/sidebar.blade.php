@@ -15,7 +15,7 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Menu</li>
-
+                @can('participantes.menu')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-user-star-line"></i>
@@ -26,7 +26,8 @@
                         <li><a href="{{ route('participantes.create') }}">Crear</a></li>
                     </ul>
                 </li>
-
+                @endcan
+                @can('vendedores.menu')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-group-line"></i>
@@ -37,7 +38,8 @@
                         <li><a href="{{ route('vendedores.create') }}">Crear</a></li>
                     </ul>
                 </li>
-
+                @endcan
+                @can('tickets.menu')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-ticket-2-line"></i>
@@ -48,7 +50,8 @@
                         <li><a href="{{ route('tickets.multiplecreate') }}">Crear</a></li>
                     </ul>
                 </li>
-
+                @endcan
+                @can('reportes.menu')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-funds-line"></i>
@@ -60,7 +63,8 @@
                         <li><a href="{{ route('reporte.vendedores') }}">Vendedores</a></li>
                     </ul>
                 </li>
-
+                @endcan
+                @can('opciones.menu')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-settings-3-line"></i>
@@ -71,6 +75,8 @@
                         <li><a href="javascript:void(0);" data-href="{{ route('ticket.imagenes') }}" class="imagenes-confirm">Recrear imagenes</a></li>
                     </ul>
                 </li>
+                @endcan
+                @can('roles.menu')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-lock-2-line"></i>
@@ -82,7 +88,7 @@
                         <li><a href="{{ route('add.roles.permiso') }}">Roles en permisos</a></li>
                     </ul>
                 </li>
-
+                @endcan
             </ul>
         </div>
         <!-- Sidebar -->

@@ -56,6 +56,7 @@
                                         <option value="Reportes">Reportes</option>
                                         <option value="Opciones">Opciones</option>
                                         <option value="Roles y Permisos">Roles y Permisos</option>
+                                        <option value="Mensajes">Mensajes</option>
                                     </select>
                                 </div>
                             </div>
