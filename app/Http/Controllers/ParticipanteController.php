@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Participante;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -123,8 +124,22 @@ class ParticipanteController extends Controller
     {   
         $participante = Participante::where('id', $id)->delete();
 
+        $tickets = Ticket::where('participante_id', $id)->get();
+
+        foreach($tickets as $ticket) {
+            $affected = DB::table('numeros')
+            ->where('id', $ticket->numero_id)
+            ->update([
+            'ticket_id' => '0',
+            'participante_id' => '0',
+            'user_id' => '0',
+            ]);
+
+            $ticket->delete();
+        }
+
         $notification = array(
-            'message' => 'Participante eliminado correctamente',
+            'message' => 'Participante y sus tickets eliminados correctamente',
             'alert-type' => 'success'
         );
 
