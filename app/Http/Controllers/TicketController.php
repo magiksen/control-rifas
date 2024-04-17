@@ -171,13 +171,23 @@ class TicketController extends Controller
                 $filatexto = $filatexto + 22;
             }
 
-            $ruta_imagen = 'images/controlactual.jpg';
+            $imageName = uniqid('control_') . '.jpg';
+
+            $ruta_imagen = 'images/'.$imageName;
         
             $controlimage->save($ruta_imagen);
-            // FIN CREAR LA IMAGEN DE CONTROL
+
+            $affected = DB::table('imagen_control')
+                ->where('id', 1)
+                ->update([
+                    'ruta' => $ruta_imagen,
+                ]);
 
             // ENVIAR MENSAJE DE CONTROL A NUMERO
-            $imagenticket = 'images/controlactual.jpg';
+            $ruta = DB::table('imagen_control')
+            ->where('id', 1)->first();
+
+            $imagenticket = $ruta->ruta;
 
             $twilio_whatsapp_number = getenv('TWILIO_WHATSAPP_NUMBER');
             $account_sid = getenv("TWILIO_SID");
@@ -418,13 +428,23 @@ class TicketController extends Controller
             $filatexto = $filatexto + 22;
         }
 
-        $ruta_imagen = 'images/controlactual.jpg';
-    
+        $imageName = uniqid('control_') . '.jpg';
+
+        $ruta_imagen = 'images/'.$imageName;
+     
         $controlimage->save($ruta_imagen);
-        // FIN CREAR LA IMAGEN DE CONTROL
+
+        $affected = DB::table('imagen_control')
+              ->where('id', 1)
+              ->update([
+                'ruta' => $ruta_imagen,
+            ]);
 
         // ENVIAR MENSAJE DE CONTROL A NUMERO
-        $imagenticket = 'images/controlactual.jpg';
+        $ruta = DB::table('imagen_control')
+        ->where('id', 1)->first();
+
+        $imagenticket = $ruta->ruta;
 
         $twilio_whatsapp_number = getenv('TWILIO_WHATSAPP_NUMBER');
         $account_sid = getenv("TWILIO_SID");
@@ -578,12 +598,23 @@ class TicketController extends Controller
             $filatexto = $filatexto + 22;
         }
 
-        $ruta_imagen = 'images/controlactual.jpg';
+        $imageName = uniqid('control_') . '.jpg';
+
+        $ruta_imagen = 'images/'.$imageName;
      
         $image->save($ruta_imagen);
 
+        $affected = DB::table('imagen_control')
+              ->where('id', 1)
+              ->update([
+                'ruta' => $ruta_imagen,
+            ]);
+
         // ENVIAR MENSAJE DE CONTROL A NUMERO
-        $imagenticket = 'images/controlactual.jpg';
+        $ruta = DB::table('imagen_control')
+        ->where('id', 1)->first();
+
+        $imagenticket = $ruta->ruta;
 
         $twilio_whatsapp_number = getenv('TWILIO_WHATSAPP_NUMBER');
         $account_sid = getenv("TWILIO_SID");
