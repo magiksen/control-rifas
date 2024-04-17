@@ -49,7 +49,6 @@ class VendedorController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'cedula' => ['required', 'string', 'max:255'],
             'telefono' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -114,15 +113,36 @@ class VendedorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $affected = DB::table('vendedors')
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'telefono' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['confirmed'],
+        ]);
+
+        if(!empty($request->password)) {
+            $affected = DB::table('users')
               ->where('id', $id)
               ->update([
-                'nombre' => $request->nombre,
-                'apellido' => $request->apellido,
+                'name' => $request->name,
+                'email' => $request->email,
                 'cedula' => $request->cedula,
                 'telefono' => $request->telefono,
-                'pais' => $request->pais
+                'pais' => $request->pais,
+                'password' => Hash::make($request->password),
             ]);
+        } else {
+            $affected = DB::table('users')
+              ->where('id', $id)
+              ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'cedula' => $request->cedula,
+                'telefono' => $request->telefono,
+                'pais' => $request->pais,
+            ]);
+        }
+        
 
             $notification = array(
                 'message' => 'Vendedor actualizado correctamente',
@@ -137,7 +157,7 @@ class VendedorController extends Controller
      */
     public function destroy($id)
     {
-        $vendedor = Vendedor::where('id', $id)->delete();
+        $vendedor = User::where('id', $id)->delete();
 
         $notification = array(
             'message' => 'Vendedor eliminado correctamente',

@@ -34,7 +34,6 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Apellido</th>
                                             <th>Numero de Tickets Vendidos</th>
                                         </tr>
                                     </thead>
@@ -42,7 +41,6 @@
                                         @foreach($vendedores as $vendedor)
                                         <tr>
                                             <td><a href="{{ route('vendedor.show',$vendedor->id) }}">{{ $vendedor->nombre }}</a></td>
-                                            <td>{{ $vendedor->apellido }}</td>
                                             <td><strong>{{ $vendedor->count }}</strong></td>
                                         </tr>
                                         @endforeach      

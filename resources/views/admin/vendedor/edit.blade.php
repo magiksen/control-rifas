@@ -28,6 +28,15 @@
 
                             <h4 class="card-title">Datos del vendedor</h4>
                             <p class="card-title-desc">Ingresa los datos del vendedor</p>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <form method="POST" action="{{ route('vendedor.update', $vendedor->id) }}">
                                 @csrf
                             <div class="row mb-3">
@@ -76,7 +85,7 @@
                             <div class="mb-3 row">
                                 <label for="password_confirmation" class="col-sm-2 col-form-label">Confirmar Contraseña</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" id="password_confirmation" name="password_confirmation" type="password" required placeholder="Repetir contraseña">
+                                    <input class="form-control" id="password_confirmation" name="password_confirmation" type="password" placeholder="Repetir contraseña">
                                 </div>
                             </div>
                             <!-- end row -->

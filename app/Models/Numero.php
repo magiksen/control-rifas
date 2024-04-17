@@ -12,7 +12,7 @@ class Numero extends Model
     protected $fillable = [
         'numero',
         'participante_id',
-        'vendedor_id',
+        'user_id',
     ];
 
     public function Participante()
@@ -26,5 +26,9 @@ class Numero extends Model
     public function Ticket()
     {
         return $this->belongsTo(Ticket::class);
+    }
+    public function User()
+    {
+        return $this->belongsTo(User::class);
     }
 }

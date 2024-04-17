@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Models\Numero;
 use App\Models\Participante;
+use App\Models\User;
 use App\Models\Vendedor;
 use App\Models\Option;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class TicketController extends Controller
     public function create(?string $numero = null)
     {
         $participantes = Participante::all();
-        $vendedores = Vendedor::all();
+        $vendedores = User::where('role_id', 3)->get();
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
         $numero_solo = Numero::where('numero', $numero)->first();
         return view('admin.ticket.create', compact('participantes', 'vendedores', 'numeros', 'numero_solo'));
@@ -48,7 +49,7 @@ class TicketController extends Controller
     {   
         $ticket = new Ticket;
         $ticket->participante_id = $request->participante;
-        $ticket->vendedor_id = $request->vendedor;
+        $ticket->user_id = $request->vendedor;
         $ticket->numero_id = $request->numero;
         $ticket->pago = $request->pago;
 
@@ -57,7 +58,7 @@ class TicketController extends Controller
         $numero = Numero::find($request->numero);
         $numero->ticket_id = $ticket->id;
         $numero->participante_id = $request->participante;
-        $numero->vendedor_id = $request->vendedor;
+        $numero->user_id = $request->vendedor;
 
         $numero->save();
 
@@ -249,7 +250,7 @@ class TicketController extends Controller
         ->update([
           'ticket_id' => '0',
           'participante_id' => '0',
-          'vendedor_id' => '0',
+          'user_id' => '0',
         ]);
 
         $ticket->delete();
@@ -281,7 +282,7 @@ class TicketController extends Controller
     public function multiplecreate(?string $numero = null)
     {
         $participantes = Participante::all();
-        $vendedores = Vendedor::all();
+        $vendedores = User::where('role_id', 3)->get();
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
 
         return view('admin.ticket.multiple', compact('participantes', 'vendedores', 'numeros'));
@@ -293,7 +294,7 @@ class TicketController extends Controller
         foreach ($request->numeros as $numero) {
             $ticket = new Ticket;
             $ticket->participante_id = $request->participante;
-            $ticket->vendedor_id = $request->vendedor;
+            $ticket->user_id = $request->vendedor;
             $ticket->numero_id = $numero;
             $ticket->pago = $request->pago;
     
@@ -302,7 +303,7 @@ class TicketController extends Controller
             $numerito = Numero::find($numero);
             $numerito->ticket_id = $ticket->id;
             $numerito->participante_id = $request->participante;
-            $numerito->vendedor_id = $request->vendedor;
+            $numerito->user_id = $request->vendedor;
 
             $numerito->save();
 

@@ -35,10 +35,11 @@ class ReporteController extends Controller
 
     public function reportevendedores() {
 
-        $vendedores = DB::table('vendedors')
-        ->join('tickets', 'vendedors.id', '=', 'tickets.vendedor_id')
-        ->select('vendedors.nombre as nombre', 'vendedors.apellido as apellido', 'vendedors.id as id', DB::raw("count(tickets.vendedor_id) as count"))
-        ->groupBy('vendedors.nombre', 'vendedors.apellido', 'vendedors.id')
+        $vendedores = DB::table('users')
+        ->where('role_id', '=', 3)
+        ->join('tickets', 'users.id', '=', 'tickets.user_id')
+        ->select('users.name as nombre', 'users.id as id', DB::raw("count(tickets.user_id) as count"))
+        ->groupBy('users.name', 'users.id')
         ->orderBy('count', 'desc')
         ->get();
 

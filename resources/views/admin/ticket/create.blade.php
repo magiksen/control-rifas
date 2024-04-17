@@ -45,7 +45,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-select buscable" name="vendedor" id="vendedor">
                                         @foreach($vendedores as $vendedor)
-                                        <option value="{{ $vendedor->id }}">{{ $vendedor->nombre.' '.$vendedor->apellido }}</option>
+                                        <option value="{{ $vendedor->id }}">{{ $vendedor->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
