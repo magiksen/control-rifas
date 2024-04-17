@@ -36,7 +36,7 @@ class TicketController extends Controller
     public function create(?string $numero = null)
     {
         $participantes = Participante::all();
-        $vendedores = User::where('role_id', 3)->get();
+        $vendedores = User::role('Vendedor')->get();
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
         $numero_solo = Numero::where('numero', $numero)->first();
         return view('admin.ticket.create', compact('participantes', 'vendedores', 'numeros', 'numero_solo'));
@@ -292,7 +292,7 @@ class TicketController extends Controller
     public function multiplecreate(?string $numero = null)
     {
         $participantes = Participante::all();
-        $vendedores = User::where('role_id', 3)->get();
+        $vendedores = User::role('Vendedor')->get();
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
 
         return view('admin.ticket.multiple', compact('participantes', 'vendedores', 'numeros'));

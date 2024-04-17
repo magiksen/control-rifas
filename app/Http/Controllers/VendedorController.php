@@ -17,7 +17,7 @@ class VendedorController extends Controller
      */
     public function index()
     {
-        $vendedores = User::where('role_id', 3)->get();
+        $vendedores = User::role('Vendedor')->get();
 
         return view('admin.vendedor.index', compact('vendedores'));
     }
@@ -63,6 +63,8 @@ class VendedorController extends Controller
             'pais' => $request->pais,
             'role_id' => 3
         ]);
+
+        $vendedor->assignRole('Vendedor');
 
         $ticketsVendidos = 0;
 
