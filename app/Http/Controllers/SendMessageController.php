@@ -11,7 +11,7 @@ use Twilio\Rest\Client;
 use Illuminate\Support\Str;
 use App\Models\Ticket;
 use App\Models\Participante;
-
+use Illuminate\Support\Facades\DB;
 
 
 class SendMessageController extends Controller
@@ -70,6 +70,12 @@ class SendMessageController extends Controller
 
         $participante = Participante::where('id', $id)->first();
 
+        $affected = DB::table('tickets')
+                ->where('participante_id', $participante->id)
+                ->update([
+                    'pago' => 1,
+                ]);
+
         //dd($participante->tickets);
 
         foreach ($participante->tickets as $ticket) {
@@ -115,7 +121,7 @@ class SendMessageController extends Controller
         }
 
         $notification = array(
-            'message' => 'Los tickets se han enviado correctamente',
+            'message' => 'Los tickets han sido pagados y enviados correctamente',
             'alert-type' => 'success'
         );
 

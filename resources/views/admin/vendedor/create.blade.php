@@ -28,6 +28,15 @@
 
                             <h4 class="card-title">Datos del vendedor</h4>
                             <p class="card-title-desc">Ingresa los datos del participante</p>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <form method="post" action="{{ route('vendedores.store') }}">
                                 @csrf
                             <div class="row mb-3">

@@ -50,7 +50,7 @@ class ParticipanteController extends Controller
         $participante->save();
 
         $allTicketsPaid = collect($participante->tickets)->every(function ($ticket) {
-            return $ticket['pago'] === 1;
+            return $ticket['pago'] == 1;
         });
 
         $notification = array(

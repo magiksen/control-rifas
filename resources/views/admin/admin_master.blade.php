@@ -205,6 +205,27 @@
     });
 </script>
 <script>
+    $('.pagar-enviar').click(function(event) {
+
+        var _href = $(this).data('href');
+
+        const { value: confirmacion } = Swal.fire({
+            title: "Estas seguro que quieres pagar y enviar los tickets?",
+            text: "No podras revertir esto!",
+            icon: "warning",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            confirmButtonText: 'Si, proceder!',
+            cancelButtonText: "Cancelar",
+        }).then((confirmacion) => {
+            if (confirmacion.isConfirmed) {
+                window.location.href = _href
+            }
+        });
+
+    });
+</script>
+<script>
         $(document).ready(function () {
             var table = $('#datatable').DataTable({
                 "language": {

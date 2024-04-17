@@ -65,13 +65,14 @@ class VendedorController extends Controller
             'role_id' => 3
         ]);
 
+        $ticketsVendidos = 0;
 
         $notification = array(
             'message' => 'Vendedor creado correctamente',
             'alert-type' => 'success'
         );
         
-        return view('admin.vendedor.show', ['vendedor' => $vendedor])->with($notification);
+        return view('admin.vendedor.show', ['vendedor' => $vendedor, 'ticketsVendidos' => $ticketsVendidos])->with($notification);
     }
 
     /**
