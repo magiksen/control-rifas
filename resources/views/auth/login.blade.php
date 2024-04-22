@@ -40,6 +40,15 @@
                 <h4 class="text-muted text-center font-size-18"><b>Ingresar</b></h4>
 
                 <div class="p-3">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                     <form class="form-horizontal mt-3" method="POST" action="{{ route('login') }}">
                     @csrf
                         <div class="form-group mb-3 row">

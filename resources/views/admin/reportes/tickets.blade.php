@@ -30,19 +30,19 @@
 
                             <div class="row mb-3">
                                <p>Tickets Comprados:</p>
-                               <p class="alert-info col-1 p-2 rounded text-center"><strong>{{ $tomados }}</strong></p>
+                               <p class="alert-info col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $tomados }}</strong></p>
                             </div>
                             <div class="row mb-3">
                                <p>Tickets Apartados:</p>
-                               <p class="alert-warning col-1 p-2 rounded text-center"><strong>{{ $apartados }}</strong></p>
+                               <p class="alert-warning col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $apartados }}</strong></p>
                             </div>
                             <div class="row mb-3">
                                <p>Tickets Pagados:</p>
-                               <p class="alert-danger col-1 p-2 rounded text-center"><strong>{{ $pagados }}</strong></p>
+                               <p class="alert-danger col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $pagados }}</strong></p>
                             </div>
                             <div class="row mb-3">
                                <p>Tickets Libres:</p>
-                               <p class="alert-success col-1 p-2 rounded text-center"><strong>{{ $libres }}</strong></p>
+                               <p class="alert-success col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $libres }}</strong></p>
                             </div>
                         </div>
                     </div>

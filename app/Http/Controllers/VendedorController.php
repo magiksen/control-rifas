@@ -114,11 +114,13 @@ class VendedorController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $user = User::findOrFail($id);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'telefono' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'email', 'unique:users,email,'.$user->id],
             'password' => ['confirmed'],
         ]);
 

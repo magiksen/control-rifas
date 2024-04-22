@@ -8,53 +8,66 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+    public function profile() {
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+
+        $paises = DB::table('paises')->get();
+
+        $pais_selected = DB::table('paises')
+        ->where('pais_numero', '=', $profileData->pais)
+        ->first();
+
+        return view('admin.profile.index', compact('profileData','paises','pais_selected'));
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+    public function profileupdate(Request $request)
+    {   
+        $id = Auth::user()->id;
+        $user = User::findOrFail($id);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'telefono' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'unique:users,email,'.$user->id],
+            'password' => ['confirmed'],
+        ]);
+
+        if(!empty($request->password)) {
+            $affected = DB::table('users')
+              ->where('id', $id)
+              ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'cedula' => $request->cedula,
+                'telefono' => $request->telefono,
+                'pais' => $request->pais,
+                'password' => Hash::make($request->password),
+            ]);
+        } else {
+            $affected = DB::table('users')
+              ->where('id', $id)
+              ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'cedula' => $request->cedula,
+                'telefono' => $request->telefono,
+                'pais' => $request->pais,
+            ]);
         }
+        
 
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+            $notification = array(
+                'message' => 'Usuario actualizado correctamente',
+                'alert-type' => 'success'
+            );
+        
+            return Redirect()->back()->with($notification);
     }
 }
