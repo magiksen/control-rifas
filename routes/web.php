@@ -29,12 +29,13 @@ Route::get('/', function () {
 
 // Admin ALl Route
 Route::controller(AdminController::class)->group(function () {
+    Route::get('/dashboard', 'index')->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('admin/logout', 'destroy')->name('admin.logout');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('admin.index');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
