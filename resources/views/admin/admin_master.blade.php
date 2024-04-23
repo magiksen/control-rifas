@@ -4,10 +4,10 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Dashboard | Upcube - Admin & Dashboard Template</title>
+    <title>Escritorio | ManSon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesdesign" name="author" />
+    <meta content="Aplicación para la realización de rifas y sorteos" name="description" />
+    <meta content="ManSon" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
 
@@ -29,6 +29,8 @@
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <!-- Custom Css-->
+    <link href="{{ asset('backend/assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
     <!-- Toastr -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
@@ -85,7 +87,7 @@
 <script src="{{ asset('backend/assets/libs/node-waves/waves.min.js') }}"></script>
 
 
-<!-- apexcharts 
+<!-- apexcharts
 <script src="{{ asset('backend/assets/libs/apexcharts/apexcharts.min.js') }}"></script>-->
 
 <!-- jquery.vectormap map -->

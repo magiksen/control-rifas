@@ -1,0 +1,66 @@
+body[data-topbar=dark] #page-topbar {
+    background-color: #000074;
+}
+
+a {
+    color: #00be00;
+}
+.page-item.active .page-link {
+    background-color: #00be00;
+    border-color: #00be00;
+}
+
+.page-link:hover {
+    color: #00be00;
+}
+
+.mm-active {
+    color: #000074 !important;
+}
+
+.mm-active>i {
+    color: #000074 !important;
+}
+
+.mm-active>a {
+    color: #000074 !important;
+}
+.mm-active>a i {
+    color: #000074 !important;
+}
+
+.mm-active .active {
+    color: #000074 !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #00be00;
+    border-color: #00be00;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #00b0bf;
+    border-color: #00b0bf;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #000074 ;
+    border-color: #000074 ;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #ff0282;
+    border-color: #ff0282;
+}
+
+.btn-warning {
+    color: #000;
+    background-color: #ffdd00;
+    border-color: #ffdd00;
+}
+
+

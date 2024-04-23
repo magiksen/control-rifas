@@ -6,6 +6,7 @@ use App\Models\Participante;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ParticipanteController extends Controller
 {
@@ -14,7 +15,14 @@ class ParticipanteController extends Controller
      */
     public function index()
     {   
-        $participantes = Participante::all();
+        
+        $user = Auth::user();
+
+        if($user->hasRole(['Vendedor'])){
+            $participantes = Participante::where('user_id', $user->id)->get();
+        } else {
+            $participantes = Participante::all();
+        }
 
         return view('admin.participante.index', compact('participantes'));
     }
@@ -34,6 +42,8 @@ class ParticipanteController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+
         $validated = $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
@@ -47,6 +57,7 @@ class ParticipanteController extends Controller
         $participante->correo = $request->correo;
         $participante->telefono = $request->telefono;
         $participante->pais = $request->pais;
+        $participante->user_id = $user->id;
 
         $participante->save();
 
