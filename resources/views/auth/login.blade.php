@@ -17,6 +17,8 @@
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <!-- Custom Css-->
+    <link href="{{ asset('backend/assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <!-- Toastr -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 </head>
@@ -74,7 +76,7 @@
 
                         <div class="form-group mb-3 text-center row mt-3 pt-1">
                             <div class="col-12">
-                                <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Entrar</button>
+                                <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Entrar</button>
                             </div>
                         </div>
 
