@@ -22,14 +22,14 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="card col-5 m-2">
+            <div class="card col-sm-12 col-md-12 col-lg-5 mb-2">
                 <div class="card-body">
 
                     <h4 class="card-title">Tickets</h4>
                     <div id="chart" class="chart"></div>
                 </div>
             </div>
-            <div class="card col-5 m-2">
+            <div class="card col-sm-12 col-md-12 col-lg-5 mb-2" style="margin-left: 10px;">
                 <div class="card-body">
 
                     <h4 class="card-title">Top 10 Vendedores</h4>

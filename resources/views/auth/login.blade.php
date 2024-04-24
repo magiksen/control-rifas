@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Login | Admin</title>
+    <title>Iniciar Sesión</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Laravel 10 admin template" name="description" />
     <meta content="Magiksen" name="author" />
