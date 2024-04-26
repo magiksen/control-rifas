@@ -14,13 +14,16 @@ class ParticipanteController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        
+    {
+
         $user = Auth::user();
 
         if($user->hasRole(['Vendedor'])){
             $participantes = Participante::where('user_id', $user->id)->get();
-        } else {
+        } elseif ($user->hasExactRoles(['Vendedor|Admin'])) {
+            $participantes = Participante::all();
+        }
+        else {
             $participantes = Participante::all();
         }
 
@@ -69,7 +72,7 @@ class ParticipanteController extends Controller
             'message' => 'Participante creado correctamente',
             'alert-type' => 'success'
         );
-        
+
         return view('admin.participante.show', ['participante' => $participante, 'allTicketsPaid' => $allTicketsPaid])->with($notification);
     }
 
@@ -118,7 +121,7 @@ class ParticipanteController extends Controller
                 'telefono' => $request->telefono,
                 'pais' => $request->pais
             ]);
-            
+
             $notification = array(
                 'message' => 'Participante actualizado correctamente',
                 'alert-type' => 'success'
@@ -132,7 +135,7 @@ class ParticipanteController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {   
+    {
         $participante = Participante::where('id', $id)->delete();
 
         $tickets = Ticket::where('participante_id', $id)->get();
@@ -157,14 +160,14 @@ class ParticipanteController extends Controller
         return Redirect()->back()->with($notification);
     }
 
-    public function pagoparticipante($id) 
+    public function pagoparticipante($id)
     {
             $affected = DB::table('tickets')
                 ->where('participante_id', $id)
                 ->update([
                     'pago' => 1,
                 ]);
-            
+
             $notification = array(
                 'message' => 'Los tickets han sido pagados correctamente',
                 'alert-type' => 'success'
