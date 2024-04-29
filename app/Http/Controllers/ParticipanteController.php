@@ -87,7 +87,7 @@ class ParticipanteController extends Controller
         $participante = Participante::where('id', $id)->first();
 
         $allTicketsPaid = collect($participante->tickets)->every(function ($ticket) {
-            return $ticket['pago'] === 1;
+            return $ticket['pago'] == 1;
         });
 
         return view('admin.participante.show', ['participante' => $participante, 'allTicketsPaid' => $allTicketsPaid]);

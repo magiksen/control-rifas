@@ -71,7 +71,7 @@
                                     </div>
                                     @php
                                         $allTicketsPaid = collect(Participante::find($participanteId)->tickets)->every(function ($ticket) {
-                                            return $ticket['pago'] === 1;
+                                            return $ticket['pago'] == 1;
                                         });
                                     @endphp
                                     @if($allTicketsPaid)
