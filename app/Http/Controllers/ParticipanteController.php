@@ -18,13 +18,16 @@ class ParticipanteController extends Controller
 
         $user = Auth::user();
 
-        if($user->hasRole(['Vendedor'])){
+
+
+        if($user->hasExactRoles(['Vendedor'])){
             $participantes = Participante::where('user_id', $user->id)->get();
         } elseif ($user->hasExactRoles(['Vendedor|Admin'])) {
             $participantes = Participante::all();
-        }
-        else {
+        } elseif ($user->hasRole(['Admin|SuperAdmin'])) {
             $participantes = Participante::all();
+        } else {
+            $participantes = [];
         }
 
         return view('admin.participante.index', compact('participantes'));

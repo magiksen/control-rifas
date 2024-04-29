@@ -59,20 +59,25 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class);
     }
 
-    public static function getpermissionGroups() 
+    public function Participantes()
+    {
+        return $this->hasMany(Participante::class);
+    }
+
+    public static function getpermissionGroups()
     {
         $permission_groups = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
 
         return $permission_groups;
     }
 
-    public static function getpermissionByGroupName($group_name) 
+    public static function getpermissionByGroupName($group_name)
     {
         $permissions = DB::table('permissions')
                         ->select('name','id')
                         ->where('group_name',$group_name)
                         ->get();
-        
+
         return $permissions;
     }
 

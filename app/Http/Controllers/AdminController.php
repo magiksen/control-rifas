@@ -45,6 +45,16 @@ class AdminController extends Controller
 
         $vendedoresJSON = $vendedores->toJson();
 
-        return view('admin.index', ['pagados' => $pagados, 'apartados' => $apartados, 'libres' => $libres, 'tomados' => $tomados, 'vendedores' => $vendedoresJSON]);
+        $participantes = DB::table('participantes')
+            ->join('tickets', 'participantes.id', '=', 'tickets.participante_id')
+            ->select('participantes.nombre as nombre', 'participantes.apellido as apellido', 'participantes.id as id', DB::raw("count(tickets.participante_id) as count"))
+            ->groupBy('participantes.nombre', 'participantes.apellido', 'participantes.id')
+            ->orderBy('count', 'desc')
+            ->limit(10)
+            ->get();
+
+        $participantesJSON = $participantes->toJson();
+
+        return view('admin.index', ['pagados' => $pagados, 'apartados' => $apartados, 'libres' => $libres, 'tomados' => $tomados, 'vendedores' => $vendedoresJSON, 'participantes' => $participantesJSON]);
     }
 }

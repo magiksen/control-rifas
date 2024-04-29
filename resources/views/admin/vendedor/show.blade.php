@@ -27,7 +27,7 @@
 
                             <h4 class="card-title">Datos del vendedor</h4>
                             <p class="card-title-desc">Visualizar los datos del vendedor</p>
-                            
+
                             <div class="row mb-3">
                                <p>Nombre: {{ $vendedor->name }}</p>
                             </div>
@@ -56,7 +56,7 @@
 
                             <h4 class="card-title">Tickets del vendedor</h4>
                             <p class="card-title-desc">Tickets vendidos por el vendedor</p>
-                            
+
                             <div class="row">
                             @foreach($ticketsVendidos as $participanteId => $tickets)
                             <div class="row mb-3 col-12">
@@ -67,8 +67,22 @@
                                             <p><strong>Ticket #{{ $ticket->numero->numero }}</strong></p>
                                             <a href="{{ route('ticket.show',$ticket->id) }}"><img class="img-thumbnail img-fluid" src="{{ asset($ticket->imagen) }}" alt="{{ $ticket->numero->numero }}"></a>
                                         </div>
-                                        @endforeach    
+                                        @endforeach
                                     </div>
+                                    @php
+                                        $allTicketsPaid = collect(Participante::find($participanteId)->tickets)->every(function ($ticket) {
+                                            return $ticket['pago'] === 1;
+                                        });
+                                    @endphp
+                                    @if($allTicketsPaid)
+                                        <div class="alert alert-success col-sm-12 col-md-6 col-lg-6 mt-2 mb-2" role="alert">
+                                            Los tickets han sido pagados y enviados al participante.
+                                        </div>
+                                    @else
+                                        <div class="col-sm-12 col-md-6 col-lg-6 mt-2 mb-2" role="alert">
+                                            <a href="javascript:void(0);" data-href="{{ route('message.multiple',Participante::find($participanteId)->id) }}" class="btn btn-success pagar-enviar">Pagar y enviar tickets</a>
+                                        </div>
+                                    @endif
                             </div>
                             @endforeach
                             </div>

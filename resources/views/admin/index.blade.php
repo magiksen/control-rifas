@@ -36,6 +36,13 @@
                     <div id="vendedores-chart" class="chart"></div>
                 </div>
             </div>
+            <div class="card col-sm-12 col-md-12 col-lg-5 mb-2">
+                <div class="card-body">
+
+                    <h4 class="card-title">Top 10 Participantes</h4>
+                    <div id="participantes-chart" class="chart"></div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -48,7 +55,7 @@
     var options = {
         series: [{{ $tomados }}, {{ $pagados }}, {{ $apartados }}, {{ $libres }}],
         chart: {
-            width: 380,
+            width: 500,
             type: 'pie',
         },
         labels: ['Comprados', 'Pagados', 'Apartados', 'Libres'],
@@ -100,6 +107,40 @@
     })
 
     var chart = new ApexCharts(document.querySelector("#vendedores-chart"), options);
+    chart.render();
+</script>
+<script>
+    var options = {
+        series: [{
+            data: []
+        }],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 4,
+                borderRadiusApplication: 'end',
+                horizontal: true,
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        xaxis: {
+            categories: [],
+        }
+    };
+
+    const participantesData = @json($participantes);
+    const participantes = JSON.parse(participantesData);
+    participantes.forEach(function(elemento) {
+        options.series[0].data.push(elemento.count);
+        options.xaxis.categories.push(elemento.nombre+' '+elemento.apellido);
+    })
+
+    var chart = new ApexCharts(document.querySelector("#participantes-chart"), options);
     chart.render();
 </script>
 

@@ -114,7 +114,7 @@ class TicketController extends Controller
             $font->wrap(250);
         });
 
-        $ruta_imagen = 'images/'.$ticket->numero->numero.'-'.$ticket->participante->nombre.'-'.$ticket->participante->apellido.'.jpg';
+        $ruta_imagen = 'images/ticket-'.$ticket->numero->numero.'.jpg';
 
         $image->save($ruta_imagen);
 
@@ -369,7 +369,7 @@ class TicketController extends Controller
             $font->wrap(250);
         });
 
-        $ruta_imagen = 'images/'.$ticket->numero->numero.'-'.$ticket->participante->nombre.'-'.$ticket->participante->apellido.'.jpg';
+        $ruta_imagen = 'images/ticket-'.$ticket->numero->numero.'.jpg';
 
         $image->save($ruta_imagen);
 
@@ -532,7 +532,7 @@ class TicketController extends Controller
                  $font->wrap(250);
              });
      
-             $ruta_imagen = 'images/'.$ticket->numero->numero.'-'.$ticket->participante->nombre.'-'.$ticket->participante->apellido.'.jpg';
+             $ruta_imagen = 'images/ticket-'.$ticket->numero->numero.'.jpg';
      
              $image->save($ruta_imagen);
 

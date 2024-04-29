@@ -21,7 +21,7 @@ class VendedorController extends Controller
 
         return view('admin.vendedor.index', compact('vendedores'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -72,7 +72,7 @@ class VendedorController extends Controller
             'message' => 'Vendedor creado correctamente',
             'alert-type' => 'success'
         );
-        
+
         return view('admin.vendedor.show', ['vendedor' => $vendedor, 'ticketsVendidos' => $ticketsVendidos])->with($notification);
     }
 
@@ -114,7 +114,7 @@ class VendedorController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {   
+    {
         $user = User::findOrFail($id);
 
         $request->validate([
@@ -146,13 +146,13 @@ class VendedorController extends Controller
                 'pais' => $request->pais,
             ]);
         }
-        
+
 
             $notification = array(
                 'message' => 'Vendedor actualizado correctamente',
                 'alert-type' => 'success'
             );
-        
+
             return Redirect()->back()->with($notification);
     }
 
