@@ -27,7 +27,7 @@
 
                             <h4 class="card-title">Datos del participante</h4>
                             <p class="card-title-desc">Visualizar los datos del participante</p>
-                            
+
                             <div class="row mb-3">
                                <p>Nombre: {{ $participante->nombre }}</p>
                             </div>
@@ -57,7 +57,7 @@
 
                             <h4 class="card-title">Tickets del participante</h4>
                             <p class="card-title-desc">Tickets obtenidos por el participante</p>
-                            
+
                             <div class="row">
                             @if(count($participante->tickets) != 0)
                                 @foreach($participante->tickets as $ticket)
@@ -82,6 +82,7 @@
                                 <div class="alert alert-success col-6" role="alert">
                                     Los tickets han sido pagados y enviados al participante.
                                 </div>
+                                <a href="{{ route('message.multiple',$participante->id) }}" class="btn btn-success">Volver a enviar tickets</a>
                                 @else
                                 <a href="javascript:void(0);" data-href="{{ route('message.multiple',$participante->id) }}" class="btn btn-success pagar-enviar">Pagar y enviar tickets</a>
                                 @endif

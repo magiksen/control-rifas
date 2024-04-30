@@ -78,6 +78,9 @@
                                         <div class="alert alert-success col-sm-12 col-md-6 col-lg-6 mt-2 mb-2" role="alert">
                                             Los tickets han sido pagados y enviados al participante.
                                         </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 mt-2 mb-2" role="alert">
+                                        <a href="{{ route('message.multiple',Participante::find($participanteId)->id) }}" class="btn btn-success">Volver a enviar tickets</a>
+                                    </div>
                                     @else
                                         <div class="col-sm-12 col-md-6 col-lg-6 mt-2 mb-2" role="alert">
                                             <a href="javascript:void(0);" data-href="{{ route('message.multiple',Participante::find($participanteId)->id) }}" class="btn btn-success pagar-enviar">Pagar y enviar tickets</a>
