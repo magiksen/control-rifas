@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\User;
+use App\Models\Vendedor;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client;
 use Illuminate\Support\Str;
@@ -45,9 +47,9 @@ class SendMessageController extends Controller
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($recipient, array(
 
-            'contentSid' => $contentSid, 
+            'contentSid' => $contentSid,
 
-            'from' => $messagingServiceSid, 
+            'from' => $messagingServiceSid,
 
             'contentVariables' => json_encode([
 
@@ -79,7 +81,7 @@ class SendMessageController extends Controller
         //dd($participante->tickets);
 
         foreach ($participante->tickets as $ticket) {
-        
+
         $numerotelf = $ticket->participante->telefono;
         // $numerotelf = Str::of($numerotelf)->substr(1);
         $numeropais = $ticket->participante->pais;
@@ -107,9 +109,9 @@ class SendMessageController extends Controller
 
         $client->messages->create($recipient, array(
 
-            'contentSid' => $contentSid, 
+            'contentSid' => $contentSid,
 
-            'from' => $messagingServiceSid, 
+            'from' => $messagingServiceSid,
 
             'contentVariables' => json_encode([
 
@@ -127,6 +129,65 @@ class SendMessageController extends Controller
 
 
         return redirect()->back()->with($notification);
+    }
+
+    public function sendvendedor($id) {
+        $vendedor = User::where('id', $id)->first();
+
+        foreach ($vendedor->tickets as $ticket) {
+
+            $affected = DB::table('tickets')
+                ->where('participante_id', $ticket->participante->id)
+                ->update([
+                    'pago' => 1,
+                ]);
+
+            // ENVIAR WS
+
+            $numerotelf = $ticket->participante->telefono;
+            $numeropais = $ticket->participante->pais;
+            $imagenticket = $ticket->imagen;
+
+            $twilio_whatsapp_number = getenv('TWILIO_WHATSAPP_NUMBER');
+
+            $account_sid = getenv("TWILIO_SID");
+
+            $auth_token = getenv("TWILIO_AUTH_TOKEN");
+
+            $contentSid = getenv("TWILIO_CONTENT_SID");
+
+            $messagingServiceSid = getenv("TWILIO_MESSAGING_SERVICE_SID");
+
+            $message = "Gracias por participar en la Gran Rifa, este es su ticket de participacion";
+
+            $recipient = "whatsapp:+".$numeropais.$numerotelf;
+
+
+            $client = new Client($account_sid, $auth_token);
+
+            $client->messages->create($recipient, array(
+
+                'contentSid' => $contentSid,
+
+                'from' => $messagingServiceSid,
+
+                'contentVariables' => json_encode([
+
+                    "1" => $imagenticket,
+
+                ]),
+
+            ));
+        }
+
+        $notification = array(
+            'message' => 'Los tickets del vendedor han sido pagados y enviados correctamente',
+            'alert-type' => 'success'
+        );
+
+
+        return redirect()->back()->with($notification);
+
     }
 
 }

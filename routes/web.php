@@ -86,6 +86,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(SendMessageController::class)->group(function () {
         Route::get('/enviarws/{id}', 'sendmessage')->name('message.send')->middleware('can:mensajes.enviar');
         Route::get('/enviarmultiple/{id}', 'sendmultiple')->name('message.multiple')->middleware('can:mensajes.enviar');
+        Route::get('/enviarvendedor/{id}', 'sendvendedor')->name('message.vendedor')->middleware('can:mensajes.enviar');
     });
 
     Route::controller(ReporteController::class)->group(function () {

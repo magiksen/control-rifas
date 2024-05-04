@@ -42,6 +42,7 @@
                             </div>
                             <!-- end row -->
                             <a href="{{ route('vendedor.edit',$vendedor->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('message.vendedor',$vendedor->id) }}" class="btn btn-success">Pagar y Enviar Tickets del Vendedor</a>
                         </div>
                     </div>
                 </div>
