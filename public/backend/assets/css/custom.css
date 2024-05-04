@@ -63,4 +63,33 @@ a {
     border-color: #ffdd00;
 }
 
+.alert-warning {
+    color: #997029;
+    background-color: #ffdd00;
+    border-color: #ffdd00;
+}
+
+.alert-warning a {
+    color: #ffffff;
+}
+
+.alert-danger {
+    color: #921c32;
+    background-color: #ff0282;
+    border-color: #ff0282;
+}
+
+.alert-danger a {
+    color: #ffffff;
+}
+
+.alert-success{
+    color: #437d52;
+    background-color: #59a66d;
+    border-color: #59a66d;
+}
+
+.alert-success a {
+    color: #ffffff;
+}
 

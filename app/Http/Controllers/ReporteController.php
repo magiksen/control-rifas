@@ -45,4 +45,17 @@ class ReporteController extends Controller
 
         return view('admin.reportes.vendedores', ['vendedores' => $vendedores]);
     }
+
+    public function show($slug) {
+
+        if ($slug == 'apartados') {
+            $data = Ticket::whereNull('pago')->get();
+        } else if ($slug == 'libres') {
+            $data = Numero::whereNull('ticket_id')->orWhere('ticket_id', 0)->get();
+        } else if ($slug == 'pagados') {
+            $data = Ticket::where('pago', '1')->get();
+        }
+
+        return view('admin.reportes.show', ['data' => $data, 'slug' => $slug]);
+    }
 }

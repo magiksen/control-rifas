@@ -28,21 +28,24 @@
                             <h4 class="card-title">Reportes Tickets</h4>
                             <p class="card-title-desc">Visualizar reportes de los tickets</p>
 
-                            <div class="row mb-3">
-                               <p>Tickets Comprados:</p>
-                               <p class="alert-info col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $tomados }}</strong></p>
-                            </div>
+{{--                            <div class="row mb-3">--}}
+{{--                               <p>Tickets Comprados:</p>--}}
+{{--                               <p class="alert-info col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $tomados }}</strong></p>--}}
+{{--                            </div>--}}
                             <div class="row mb-3">
                                <p>Tickets Apartados:</p>
-                               <p class="alert-warning col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $apartados }}</strong></p>
+                               <p class="alert-warning col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong><a
+                                           href="{{ route('reporte.show', 'apartados') }}">{{ $apartados }}</a></strong></p>
                             </div>
                             <div class="row mb-3">
                                <p>Tickets Pagados:</p>
-                               <p class="alert-danger col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $pagados }}</strong></p>
+                               <p class="alert-danger col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong><a
+                                           href="{{ route('reporte.show', 'pagados') }}">{{ $pagados }}</a></strong></p>
                             </div>
                             <div class="row mb-3">
                                <p>Tickets Libres:</p>
-                               <p class="alert-success col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong>{{ $libres }}</strong></p>
+                               <p class="alert-success col-12 col-sm-2 col-md-1 col-lg-1  p-2 rounded text-center"><strong><a
+                                           href="{{ route('reporte.show', 'libres') }}">{{ $libres }}</a></strong></p>
                             </div>
                         </div>
                     </div>

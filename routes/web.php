@@ -92,6 +92,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/reporte/tickets', 'reportetickets')->name('reporte.tickets')->middleware('can:reportes.list');
         Route::get('/reporte/participantes', 'reporteparticipantes')->name('reporte.participantes')->middleware('can:reportes.list');
         Route::get('/reporte/vendedores', 'reportevendedores')->name('reporte.vendedores')->middleware('can:reportes.list');
+        Route::get('/reporte/{slug}', 'show')->name('reporte.show')->middleware('can:reportes.list');
     });
 
     Route::controller(OptionController::class)->group(function () {
