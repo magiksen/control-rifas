@@ -53,23 +53,24 @@
 <script src="{{ asset('backend/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 <script>
     var options = {
-        series: [{{ $tomados }}, {{ $pagados }}, {{ $apartados }}, {{ $libres }}],
+        series: [{{ $pagados }}, {{ $apartados }}, {{ $libres }}],
         chart: {
             width: 500,
             type: 'pie',
         },
-        labels: ['Comprados', 'Pagados', 'Apartados', 'Libres'],
+        labels: ['Pagados', 'Apartados', 'Libres'],
         responsive: [{
             breakpoint: 480,
             options: {
                 chart: {
-                    width: 200
+                    width: 200,
                 },
                 legend: {
                     position: 'bottom'
-                }
+                },
             }
-        }]
+        }],
+        colors: ['#59a66d', '#ffc969', '#ff0282']
     };
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
@@ -96,7 +97,8 @@
         },
         xaxis: {
             categories: [],
-        }
+        },
+        colors:['#000074']
     };
 
     const vendedoresData = @json($vendedores);
@@ -130,7 +132,8 @@
         },
         xaxis: {
             categories: [],
-        }
+        },
+        colors:['#000074']
     };
 
     const participantesData = @json($participantes);
