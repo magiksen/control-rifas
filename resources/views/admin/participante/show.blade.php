@@ -78,14 +78,16 @@
                                 </div>
                                 @endforeach
                                 </div>
-                                @if($allTicketsPaid)
-                                <div class="alert alert-success col-6" role="alert">
-                                    Los tickets han sido pagados y enviados al participante.
-                                </div>
-                                <a href="{{ route('message.multiple',$participante->id) }}" class="btn btn-success">Volver a enviar tickets</a>
-                                @else
-                                <a href="javascript:void(0);" data-href="{{ route('message.multiple',$participante->id) }}" class="btn btn-success pagar-enviar">Pagar y enviar tickets</a>
-                                @endif
+                                @can('mensajes.enviar')
+                                    @if($allTicketsPaid)
+                                        <div class="alert alert-success col-6" role="alert">
+                                            Los tickets han sido pagados y enviados al participante.
+                                        </div>
+                                        <a href="{{ route('message.multiple',$participante->id) }}" class="btn btn-success">Volver a enviar tickets</a>
+                                    @else
+                                        <a href="javascript:void(0);" data-href="{{ route('message.multiple',$participante->id) }}" class="btn btn-success pagar-enviar">Pagar y enviar tickets</a>
+                                    @endif
+                                @endcan
                             @else
                             <div class="alert alert-danger col-5" role="alert">
                                 El participante no ha comprado ningun ticket

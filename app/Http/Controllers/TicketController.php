@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Vendedor;
 use App\Models\Option;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Laravel\Facades\Image;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Typography\FontFactory;
@@ -35,8 +36,22 @@ class TicketController extends Controller
      */
     public function create(?string $numero = null)
     {
-        $participantes = Participante::all();
-        $vendedores = User::role('Vendedor')->get();
+        $user = Auth::user();
+
+        if($user->hasExactRoles(['Vendedor'])){
+            $participantes = Participante::where('user_id', $user->id)->get();
+            $vendedores = User::where('id', $user->id)->get();
+        } elseif ($user->hasExactRoles(['Vendedor|Admin'])) {
+            $participantes = Participante::all();
+            $vendedores = User::role('Vendedor')->get();
+        } elseif ($user->hasRole(['Admin|SuperAdmin'])) {
+            $participantes = Participante::all();
+            $vendedores = User::role('Vendedor')->get();
+        } else {
+            $participantes = [];
+            $vendedores = [];
+        }
+
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
         $numero_solo = Numero::where('numero', $numero)->first();
         return view('admin.ticket.create', compact('participantes', 'vendedores', 'numeros', 'numero_solo'));
@@ -46,7 +61,7 @@ class TicketController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {
         $ticket = new Ticket;
         $ticket->participante_id = $request->participante;
         $ticket->user_id = $request->vendedor;
@@ -63,7 +78,7 @@ class TicketController extends Controller
         $numero->save();
 
         $image = Image::read('images/original.jpg');
-        
+
        if($ticket->participante->cedula == NULL) {
            $cedula = "-";
        } else {
@@ -126,7 +141,7 @@ class TicketController extends Controller
 
             // CREAR LA IMAGEN DE CONTROL
             $numeros = Numero::query()->orderBy('numero', 'asc')->get();
-        
+
 
             $controlimage = Image::read('images/cuadrocontrol.jpg');
 
@@ -174,7 +189,7 @@ class TicketController extends Controller
             $imageName = uniqid('control_') . '.jpg';
 
             $ruta_imagen = 'images/'.$imageName;
-        
+
             $controlimage->save($ruta_imagen);
 
             $affected = DB::table('imagen_control')
@@ -201,9 +216,9 @@ class TicketController extends Controller
             $client = new Client($account_sid, $auth_token);
             $client->messages->create($recipient, array(
 
-                'contentSid' => $contentSid, 
+                'contentSid' => $contentSid,
 
-                'from' => $messagingServiceSid, 
+                'from' => $messagingServiceSid,
 
                 'contentVariables' => json_encode([
 
@@ -273,14 +288,14 @@ class TicketController extends Controller
         return Redirect()->route('tickets.index')->with($notification);
     }
 
-    public function pago($id) 
+    public function pago($id)
     {
             $affected = DB::table('tickets')
                 ->where('id', $id)
                 ->update([
                     'pago' => 1,
                 ]);
-            
+
             $notification = array(
                 'message' => 'El ticket ha sido pagado correctamente',
                 'alert-type' => 'success'
@@ -288,11 +303,25 @@ class TicketController extends Controller
 
             return Redirect()->back()->with($notification);
     }
-   
+
     public function multiplecreate(?string $numero = null)
     {
-        $participantes = Participante::all();
-        $vendedores = User::role('Vendedor')->get();
+        $user = Auth::user();
+
+        if($user->hasExactRoles(['Vendedor'])){
+            $participantes = Participante::where('user_id', $user->id)->get();
+            $vendedores = User::where('id', $user->id)->get();
+        } elseif ($user->hasExactRoles(['Vendedor|Admin'])) {
+            $participantes = Participante::all();
+            $vendedores = User::role('Vendedor')->get();
+        } elseif ($user->hasRole(['Admin|SuperAdmin'])) {
+            $participantes = Participante::all();
+            $vendedores = User::role('Vendedor')->get();
+        } else {
+            $participantes = [];
+            $vendedores = [];
+        }
+
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
 
         return view('admin.ticket.multiple', compact('participantes', 'vendedores', 'numeros'));
@@ -307,7 +336,7 @@ class TicketController extends Controller
             $ticket->user_id = $request->vendedor;
             $ticket->numero_id = $numero;
             $ticket->pago = $request->pago;
-    
+
             $ticket->save();
 
             $numerito = Numero::find($numero);
@@ -318,7 +347,7 @@ class TicketController extends Controller
             $numerito->save();
 
             $image = Image::read('images/original.jpg');
-        
+
        if($ticket->participante->cedula == NULL) {
            $cedula = "-";
        } else {
@@ -383,7 +412,7 @@ class TicketController extends Controller
 
         // CREAR LA IMAGEN DE CONTROL
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
-        
+
 
         $controlimage = Image::read('images/cuadrocontrol.jpg');
 
@@ -431,7 +460,7 @@ class TicketController extends Controller
         $imageName = uniqid('control_') . '.jpg';
 
         $ruta_imagen = 'images/'.$imageName;
-     
+
         $controlimage->save($ruta_imagen);
 
         $affected = DB::table('imagen_control')
@@ -458,9 +487,9 @@ class TicketController extends Controller
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($recipient, array(
 
-            'contentSid' => $contentSid, 
+            'contentSid' => $contentSid,
 
-            'from' => $messagingServiceSid, 
+            'from' => $messagingServiceSid,
 
             'contentVariables' => json_encode([
 
@@ -483,7 +512,7 @@ class TicketController extends Controller
 
         $tickets = Ticket::all();
         //dd($tickets);
-        
+
 
         foreach($tickets as $ticket) {
              $image = Image::read('images/original.jpg');
@@ -531,9 +560,9 @@ class TicketController extends Controller
                  $font->lineHeight(1.6);
                  $font->wrap(250);
              });
-     
+
              $ruta_imagen = 'images/ticket-'.$ticket->numero->numero.'.jpg';
-     
+
              $image->save($ruta_imagen);
 
              $affected = DB::table('tickets')
@@ -542,7 +571,7 @@ class TicketController extends Controller
                 'imagen' => $ruta_imagen,
             ]);
         }
-        
+
          $notification = array(
                  'message' => 'Imagenes recreadas correctamente',
                  'alert-type' => 'success'
@@ -553,7 +582,7 @@ class TicketController extends Controller
 
     public function cuadrocontrol() {
         $numeros = Numero::query()->orderBy('numero', 'asc')->get();
-        
+
 
         $image = Image::read('images/cuadrocontrol.jpg');
 
@@ -601,7 +630,7 @@ class TicketController extends Controller
         $imageName = uniqid('control_') . '.jpg';
 
         $ruta_imagen = 'images/'.$imageName;
-     
+
         $image->save($ruta_imagen);
 
         $affected = DB::table('imagen_control')
@@ -628,9 +657,9 @@ class TicketController extends Controller
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($recipient, array(
 
-            'contentSid' => $contentSid, 
+            'contentSid' => $contentSid,
 
-            'from' => $messagingServiceSid, 
+            'from' => $messagingServiceSid,
 
             'contentVariables' => json_encode([
 
