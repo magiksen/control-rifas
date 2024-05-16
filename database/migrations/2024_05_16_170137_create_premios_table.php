@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('options', function (Blueprint $table) {
+        Schema::create('premios', function (Blueprint $table) {
             $table->id();
-            $table->string('opcion');
-            $table->string('valor');
+            $table->string('nombre');
+            $table->string('loteria')->nullable();
+            $table->string('hora')->nullable();
+            $table->string('numero')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('options');
+        Schema::dropIfExists('premios');
     }
 };

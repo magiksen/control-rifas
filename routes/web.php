@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ParticipanteController;
+use App\Http\Controllers\PremioController;
 use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\NumeroController;
 use App\Http\Controllers\TicketController;
@@ -123,6 +124,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/roles/permisos/store', 'storerolespermisos')->name('store.role.permission')->middleware('can:roles.add');
         Route::get('/edit/roles/permisos/{id}', 'editarrolespermisos')->name('editar.roles.permisos')->middleware('can:roles.edit');
         Route::post('/roles/permisos/update/{id}', 'updaterolespermisos')->name('update.role.permission')->middleware('can:roles.edit');
+    });
+
+    Route::controller(PremioController::class)->group(function () {
+        Route::get('/premios', 'index')->name('premios.index')->middleware('can:opciones.list');
+        Route::get('/premios/crear', 'create')->name('crear.premio')->middleware('can:opciones.edit');
+        Route::post('/premios/store', 'store')->name('store.premio')->middleware('can:opciones.edit');
+        Route::get('/premio/{id}/edit', 'edit')->name('premio.edit')->middleware('can:opciones.edit');
+        Route::post('/premio/{id}/edit', 'update')->name('premio.update')->middleware('can:opciones.edit');
+        Route::get('/ganadores', 'ganadores')->name('premios.ganadores')->middleware('can:opciones.list');
+        Route::get('/premio/{id}/delete', 'destroy')->name('premio.destroy')->middleware('can:opciones.edit');
     });
 
 });
