@@ -63,14 +63,14 @@
                                 </div>
                             </div>
                             <!-- end row -->
-
+                            @hasanyrole('Admin|SuperAdmin')
                             <div class="row m-3 col-4">
                                 <div class="form-check form-switch" dir="ltr">
                                     <label class="form-check-label" for="pago">Tickets pagados</label>
                                     <input type="checkbox" class="form-check-input" id="pago" name="pago" value="1">
                                 </div>
                             </div>
-
+                            @endhasanyrole
                             <button class="btn btn-primary" type="submit">Crear</button>
                             </form>
                         </div>

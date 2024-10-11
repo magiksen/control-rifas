@@ -329,13 +329,23 @@ class TicketController extends Controller
 
     public function multiplestore(Request $request)
     {
+        $user = Auth::user();
+        
+        if ($user->hasExactRoles(['Vendedor|Admin'])){
+            $pago = $request->pago;
+        } elseif ($user->hasRole(['Admin|SuperAdmin'])) {
+            $pago = $request->pago;
+        } elseif ($user->hasExactRoles(['Vendedor'])) {
+            $pago = 0;
+        }
+        
         //dd($request->numeros);
         foreach ($request->numeros as $numero) {
             $ticket = new Ticket;
             $ticket->participante_id = $request->participante;
             $ticket->user_id = $request->vendedor;
             $ticket->numero_id = $numero;
-            $ticket->pago = $request->pago;
+            $ticket->pago = $pago;
 
             $ticket->save();
 
